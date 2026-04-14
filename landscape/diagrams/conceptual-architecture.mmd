@@ -1,0 +1,75 @@
+%% OpenLeap Conceptual Architecture
+%% Shows: Agora pipeline, 4-Tier services, PLE flow
+
+flowchart TB
+    subgraph AGORA["AGORA — AI-Powered Toolchain"]
+        direction LR
+
+        subgraph ELARA["Elara — Problem Space"]
+            E1[Discover]
+            E2[Compose]
+            E3[Specify]
+            E4[Engineer]
+            E1 --> E2 --> E3 --> E4
+        end
+
+        FREEZE["Conceptual<br/>Freeze"]
+
+        subgraph TELOS["Telos — Solution Space"]
+            T1D[Decompose]
+            T1S[Specify]
+            T1C[Catalog]
+            T1D --> T1S --> T1C
+        end
+
+        NOA["Noa<br/>Shared AI<br/>(Claude)"]
+
+        E4 --> FREEZE --> T1D
+        NOA -.-> ELARA
+        NOA -.-> TELOS
+    end
+
+    subgraph PLE["Product Line Engineering"]
+        direction LR
+        CAT["Feature Catalog<br/>(Telos)"]
+        PC["Product Config<br/>(Elara)"]
+        UVL["UVL Variability<br/>(UI-SPLE)"]
+        SC["Screen Contracts<br/>(AUI/CUI)"]
+        CAT --> PC
+        CAT --> UVL --> SC
+    end
+
+    T1C --> CAT
+
+    subgraph SERVICES["ERP Microservices — 4-Tier Runtime"]
+        direction TB
+        TIER1["T1 Platform<br/>IAM · ref · i18n · si · dms · rpt"]
+        TIER2["T2 Shared Business<br/>bp · cal"]
+        TIER3["T3 Core Suites<br/>PPS · FI · SD · HR · PS"]
+        TIER4["T4 Data & Analytics<br/>BI · ETL"]
+
+        TIER3 -->|"domain events"| TIER4
+        TIER3 -.->|"sync lookups"| TIER1
+        TIER3 -.->|"shared data"| TIER2
+    end
+
+    T1S -->|"service specs<br/>+ contracts"| SERVICES
+    SC -->|"screen contracts"| UI
+
+    subgraph UI["Product UIs — Nuxt 4 / Vue 3"]
+        direction LR
+        UIKIT["ui.kit<br/>Components"]
+        UIBASE["ui.base<br/>Auth · Shell"]
+        PRODUCTS["Product UIs<br/>Elara · Telos · IAM<br/>DMS · DPS · ..."]
+        UIKIT --> UIBASE --> PRODUCTS
+    end
+
+    classDef agora fill:#e8eaf6,stroke:#283593
+    classDef ple fill:#fff3e0,stroke:#e65100
+    classDef services fill:#e8f5e9,stroke:#2e7d32
+    classDef ui fill:#fce4ec,stroke:#880e4f
+
+    class ELARA,TELOS,NOA,FREEZE agora
+    class CAT,PC,UVL,SC ple
+    class TIER1,TIER2,TIER3,TIER4 services
+    class UIKIT,UIBASE,PRODUCTS ui

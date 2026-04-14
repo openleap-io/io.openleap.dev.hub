@@ -1,0 +1,586 @@
+# OpenLeap Ecosystem — Repository Catalog
+# Last updated: 2026-04-01
+# Total: 56 repositories
+#
+# Categories: specification, backend-service, shared-library, parent-pom,
+#             product-ui, component-library, shared-layer, guidelines,
+#             tooling, infrastructure
+#
+# Status: active (commits within last 30 days), maintained (commits within 90 days),
+#         stale (no recent commits or not a git repo), archived (superseded)
+
+# ═══════════════════════════════════════════════════════════════════
+# SPECIFICATION
+# ═══════════════════════════════════════════════════════════════════
+
+- id: io.openleap.spec
+  category: specification
+  description: Domain specs, API/event contracts, architecture, concepts
+  tech: [markdown, yaml, json]
+  build: none
+  depends_on: []
+  status: active
+  last_activity: 2026-03-29
+  notes: Central specification mono-repo — source of truth
+
+# ═══════════════════════════════════════════════════════════════════
+# BACKEND — FOUNDATION
+# ═══════════════════════════════════════════════════════════════════
+
+- id: io.openleap.parent
+  category: parent-pom
+  description: Maven parent BOM — Java 25, Spring Boot 4.0.2, Spring Cloud 2025.1.1
+  tech: [java-25]
+  build: maven
+  depends_on: []
+  status: active
+  last_activity: 2026-03-02
+
+- id: io.openleap.starter
+  category: shared-library
+  description: Core service starter — security, outbox, messaging, persistence, telemetry
+  tech: [java-25, spring-boot-4]
+  build: maven
+  depends_on: [io.openleap.parent]
+  status: active
+  last_activity: 2026-03-19
+  artifact: io.openleap.common:core-service:3.0.3-SNAPSHOT
+
+- id: io.openleap.common.nfs
+  category: shared-library
+  description: News Feed Service starter — enriched, encrypted, per-subscriber messages
+  tech: [java-25, spring-boot-4]
+  build: maven
+  depends_on: [io.openleap.parent, io.openleap.starter]
+  status: active
+  last_activity: 2026-03-11
+
+# ═══════════════════════════════════════════════════════════════════
+# BACKEND — IAM SERVICES
+# ═══════════════════════════════════════════════════════════════════
+
+- id: io.openleap.iam.principal
+  category: backend-service
+  description: Principal management — users, services, systems, devices with Keycloak sync
+  tech: [java-25, spring-boot-4, postgresql, keycloak]
+  build: maven
+  depends_on: [io.openleap.parent, io.openleap.starter]
+  status: active
+  last_activity: 2026-03-18
+  api_path: /api/v1/iam/principals
+
+- id: io.openleap.iam.authz
+  category: backend-service
+  description: Authorization service — RBAC permission management
+  tech: [java-25, spring-boot-4, postgresql]
+  build: maven
+  depends_on: [io.openleap.parent, io.openleap.starter]
+  status: active
+  last_activity: 2026-03-18
+
+- id: io.openleap.iam.tenant
+  category: backend-service
+  description: Tenant management — multi-tenant context and isolation
+  tech: [java-25, spring-boot-4, postgresql]
+  build: maven
+  depends_on: [io.openleap.parent, io.openleap.starter]
+  status: active
+  last_activity: 2026-03-18
+
+- id: io.openleap.iam.audit
+  category: backend-service
+  description: Audit logging — compliance and audit trail
+  tech: [java-25, spring-boot-4, postgresql]
+  build: maven
+  depends_on: [io.openleap.parent, io.openleap.starter]
+  status: active
+  last_activity: 2026-03-18
+
+# ═══════════════════════════════════════════════════════════════════
+# BACKEND — PLATFORM SERVICES (T1)
+# ═══════════════════════════════════════════════════════════════════
+
+- id: io.openleap.tech.dms
+  category: backend-service
+  description: Document Management Service — S3/MinIO storage, multimodule
+  tech: [java-25, spring-boot-4, postgresql, s3]
+  build: maven
+  depends_on: [io.openleap.starter]
+  status: active
+  last_activity: 2026-03-18
+  api_path: /api/v1/tech/dms
+  notes: Uses spring-boot-starter-parent directly (TODO migrate to io.openleap.parent)
+
+- id: io.openleap.t1.ref
+  category: backend-service
+  description: Reference Data Service — codes, lookups, master data
+  tech: [java-25, spring-boot-4, postgresql]
+  build: maven
+  depends_on: [io.openleap.parent, io.openleap.starter]
+  status: active
+  last_activity: 2026-03-31
+
+- id: io.openleap.t1.cfg
+  category: backend-service
+  description: Configuration Service — runtime configuration management
+  tech: [java-25, spring-boot-4, postgresql]
+  build: maven
+  depends_on: [io.openleap.parent, io.openleap.starter]
+  status: active
+  last_activity: 2026-04-01
+
+- id: io.openleap.t1.i18n
+  category: backend-service
+  description: Internationalization Service — translations and locale management
+  tech: [java-25, spring-boot-4, postgresql]
+  build: maven
+  depends_on: [io.openleap.parent, io.openleap.starter]
+  status: active
+  last_activity: 2026-04-01
+
+- id: io.openleap.t1.jc
+  category: backend-service
+  description: Job Control Service — batch job scheduling and management
+  tech: [java-25, spring-boot-4, postgresql]
+  build: maven
+  depends_on: [io.openleap.parent, io.openleap.starter]
+  status: active
+  last_activity: 2026-04-01
+
+- id: io.openleap.t1_rpt
+  category: backend-service
+  description: Reporting Service — report generation
+  tech: [java-25, spring-boot-4]
+  build: maven
+  depends_on: [io.openleap.parent]
+  status: maintained
+  last_activity: 2025-11-28
+
+# ═══════════════════════════════════════════════════════════════════
+# BACKEND — SHARED BUSINESS SERVICES (T2)
+# ═══════════════════════════════════════════════════════════════════
+
+- id: io.openleap.shared.bp
+  category: backend-service
+  description: Business Partner — party master data (organizations, persons), CQRS reference impl
+  tech: [java-25, spring-boot-4, postgresql, rabbitmq]
+  build: maven
+  depends_on: [io.openleap.parent]
+  status: active
+  last_activity: 2026-03-16
+  api_path: /api/shared/bp/v1
+
+- id: io.openleap.shared.bp.old
+  category: backend-service
+  description: Previous version of Business Partner service
+  tech: [java-25, spring-boot-4, postgresql]
+  build: maven
+  depends_on: [io.openleap.parent]
+  status: archived
+  last_activity: 2026-02-21
+  notes: Superseded by io.openleap.shared.bp
+
+# ═══════════════════════════════════════════════════════════════════
+# BACKEND — DOMAIN SERVICES (T3)
+# ═══════════════════════════════════════════════════════════════════
+
+- id: io.openleap.fi.gl
+  category: backend-service
+  description: General Ledger — Finance suite, with ArchUnit architecture testing
+  tech: [java-25, spring-boot-4, postgresql, rabbitmq]
+  build: maven
+  depends_on: [io.openleap.parent, io.openleap.starter]
+  status: active
+  last_activity: 2026-03-10
+  api_path: /api/fi/gl/v1
+
+- id: io.openleap.fi.ap
+  category: backend-service
+  description: Accounts Payable — invoice processing and payment management
+  tech: [java-25, spring-boot-4, postgresql]
+  build: maven
+  depends_on: [io.openleap.parent]
+  status: maintained
+  last_activity: 2026-01-19
+
+- id: io.openleap.fi.ar
+  category: backend-service
+  description: Accounts Receivable — customer invoicing and collections
+  tech: [java-25, spring-boot-4, postgresql]
+  build: maven
+  depends_on: [io.openleap.parent]
+  status: maintained
+  last_activity: 2025-12-17
+
+- id: io.openleap.fi.acc
+  category: backend-service
+  description: Accounting Core — shared accounting foundation
+  tech: [java-25, spring-boot-4, postgresql]
+  build: maven
+  depends_on: [io.openleap.parent]
+  status: maintained
+  last_activity: 2025-11-07
+
+- id: io.openleap.fi.bank
+  category: backend-service
+  description: Banking Service — bank account and payment processing
+  tech: [java-25, spring-boot-4, postgresql]
+  build: maven
+  depends_on: [io.openleap.parent]
+  status: maintained
+  last_activity: 2025-10-19
+
+- id: io.openleap.fi.slc
+  category: backend-service
+  description: Subledger Core — subledger accounting foundation
+  tech: [java-25, spring-boot-4, postgresql]
+  build: maven
+  depends_on: [io.openleap.parent]
+  status: maintained
+  last_activity: 2025-10-14
+
+- id: io.openleap.pur.sup
+  category: backend-service
+  description: Supplier Catalog — supplier catalog management
+  tech: [java-25, spring-boot-4, postgresql]
+  build: maven
+  depends_on: [io.openleap.parent]
+  status: maintained
+  last_activity: 2025-11-15
+
+- id: io.openleap.fi.gle
+  category: backend-service
+  description: General Ledger (older version) — Java 21, Spring Boot 3.2.2
+  tech: [java-21, spring-boot-3]
+  build: maven
+  depends_on: []
+  status: archived
+  last_activity: 2026-02-04
+  notes: Superseded by io.openleap.fi.gl
+
+# ═══════════════════════════════════════════════════════════════════
+# BACKEND — AGORA PLATFORM
+# ═══════════════════════════════════════════════════════════════════
+
+- id: io.openleap.telos
+  category: backend-service
+  description: Telos — specification management, registry, dependency graphs
+  tech: [java-25, spring-boot-4, mongodb, neo4j]
+  build: maven
+  depends_on: []
+  status: maintained
+  last_activity: 2026-02-26
+  notes: Uses spring-boot-starter-parent directly (not io.openleap.parent)
+
+- id: io.openleap.telos.ai
+  category: backend-service
+  description: Telos AI — architect chat, formalization, extraction, semantic search
+  tech: [java-25, spring-boot-4, spring-ai, milvus]
+  build: maven
+  depends_on: [io.openleap.telos]
+  status: maintained
+  last_activity: 2026-02-27
+
+- id: io.openleap.telos.cli
+  category: tooling
+  description: CLI wrapper for Telos REST API (GraalVM native image)
+  tech: [java-21, picocli]
+  build: maven
+  depends_on: []
+  status: stale
+  notes: Not a git repo
+
+- id: io.openleap.elara
+  category: backend-service
+  description: Elara — AI-powered business discovery and process extraction
+  tech: [java-25, spring-boot-4]
+  build: maven
+  depends_on: []
+  status: stale
+  notes: Not a git repo — development state
+
+- id: io.openleap.noa
+  category: backend-service
+  description: Noa — shared AI intelligence layer (Claude API, Neo4j, Milvus)
+  tech: [java-25, spring-boot-4, spring-ai, neo4j, milvus]
+  build: maven
+  depends_on: []
+  status: stale
+  notes: Not a git repo — development state
+
+- id: io.openleap.dps
+  category: backend-service
+  description: DataVault Portability Service — GDPR Art. 15/20 data export
+  tech: [java-25, spring-boot-4, aws-sdk, postgresql]
+  build: maven
+  depends_on: []
+  status: stale
+  notes: Not a git repo — development state
+
+# ═══════════════════════════════════════════════════════════════════
+# BACKEND — ROOT/LEGACY
+# ═══════════════════════════════════════════════════════════════════
+
+- id: io.openleap
+  category: backend-service
+  description: Root repo containing iam.authz (legacy layout)
+  tech: [java-25]
+  build: maven
+  depends_on: []
+  status: stale
+  notes: Appears to be an older monorepo structure — iam.authz now lives in its own repo
+
+# ═══════════════════════════════════════════════════════════════════
+# FRONTEND — FOUNDATION
+# ═══════════════════════════════════════════════════════════════════
+
+- id: io.openleap.ui.kit
+  category: component-library
+  description: Enterprise Vue 3 component library — 6 packages (components, composables, core, enterprise, nuxt, tokens)
+  tech: [typescript, vue-3, tailwind-4, shadcn-vue]
+  build: pnpm
+  depends_on: []
+  status: active
+  last_activity: 2026-03-24
+  packages:
+    - "@openleap-io/ui-core"
+    - "@openleap-io/ui-tokens"
+    - "@openleap-io/ui-components"
+    - "@openleap-io/ui-enterprise"
+    - "@openleap-io/ui-composables"
+    - "@openleap-io/ui-nuxt"
+
+- id: io.openleap.ui.base
+  category: shared-layer
+  description: Shared Nuxt layer — OIDC auth, IAM permissions, navigation, app shell
+  tech: [typescript, nuxt-4, vue-3, tailwind-4]
+  build: pnpm
+  depends_on: [io.openleap.ui.kit]
+  status: active
+  last_activity: 2026-03-23
+
+- id: io.openleap.ui.common
+  category: shared-library
+  description: Shared frontend utilities and common code
+  tech: [typescript, vue-3]
+  build: pnpm
+  depends_on: []
+  status: maintained
+  last_activity: 2026-02-07
+
+- id: io.openleap.ui.starter
+  category: tooling
+  description: Docker compose scaffolding for standalone Nuxt app setup
+  tech: [docker]
+  build: docker
+  depends_on: []
+  status: stale
+  notes: Not a git repo
+
+# ═══════════════════════════════════════════════════════════════════
+# FRONTEND — PRODUCT UIs
+# ═══════════════════════════════════════════════════════════════════
+
+- id: io.openleap.elara.ui
+  category: product-ui
+  description: Elara — business discovery UI with BPMN.js, D3 graph, workflow design
+  tech: [typescript, nuxt-4, vue-3, bpmn-js, d3]
+  build: pnpm
+  depends_on: [io.openleap.ui.base, io.openleap.ui.kit]
+  status: active
+  last_activity: 2026-03-21
+
+- id: io.openleap.telos.ui
+  category: product-ui
+  description: Telos — spec management dashboard with CodeMirror, OpenAPI codegen
+  tech: [typescript, nuxt-4, vue-3, codemirror, d3]
+  build: pnpm
+  depends_on: [io.openleap.ui.kit]
+  status: active
+  last_activity: 2026-03-21
+
+- id: io.openleap.iam.ui
+  category: product-ui
+  description: IAM console — principals, authorization, tenants, audit
+  tech: [typescript, nuxt-4, vue-3, chart-js]
+  build: pnpm
+  depends_on: [io.openleap.ui.base]
+  status: active
+  last_activity: 2026-03-23
+
+- id: io.openleap.dps.ui
+  category: product-ui
+  description: Data Portability dashboard
+  tech: [typescript, nuxt-3, vue-3, tailwind-4]
+  build: pnpm
+  depends_on: [io.openleap.ui.kit]
+  status: active
+  last_activity: 2026-02-14
+  notes: Still on Nuxt 3 — migration to Nuxt 4 pending
+
+- id: io.openleap.tech.dms.ui
+  category: product-ui
+  description: Document Management UI — dual-pane layout, file management
+  tech: [typescript, nuxt-4, vue-3, splitpanes]
+  build: pnpm
+  depends_on: [io.openleap.ui.base, io.openleap.ui.kit]
+  status: active
+  last_activity: 2026-03-24
+
+- id: io.openleap.nautilos.ui
+  category: product-ui
+  description: Dashboard — Vite-based SPA (not Nuxt) with Keycloak
+  tech: [typescript, vite, vue-3, d3]
+  build: pnpm
+  depends_on: []
+  status: maintained
+  last_activity: 2026-01-08
+  notes: Uses Vite directly (not Nuxt), has integrated mock backend (Elysia)
+
+- id: io.openleap.ai.autoclaude.ui
+  category: product-ui
+  description: AutoClaude job monitoring and control dashboard
+  tech: [typescript, nuxt-4, vue-3]
+  build: pnpm
+  depends_on: [io.openleap.ui.kit]
+  status: active
+  last_activity: 2026-03-21
+
+- id: io.openleap.iac.ui
+  category: product-ui
+  description: Infrastructure-as-Code UI
+  tech: []
+  build: unknown
+  depends_on: []
+  status: stale
+  notes: Empty repo
+
+# ═══════════════════════════════════════════════════════════════════
+# GUIDELINES
+# ═══════════════════════════════════════════════════════════════════
+
+- id: io.openleap.dev.guidelines
+  category: guidelines
+  description: Backend architecture knowledge base — 2137 rules, 63 ADRs, 52 ontology domains
+  tech: [markdown]
+  build: none
+  depends_on: []
+  status: active
+  last_activity: 2026-03-16
+  notes: Consumed by Claude Code agents for code generation governance
+
+- id: io.openleap.ui.guidelines
+  category: guidelines
+  description: Frontend architecture knowledge base — 261 rules, 31 ADRs, 18 ontology domains
+  tech: [markdown]
+  build: none
+  depends_on: []
+  status: active
+  last_activity: 2026-03-22
+  notes: Consumed by Claude Code agents for UI generation governance
+
+# ═══════════════════════════════════════════════════════════════════
+# TOOLING
+# ═══════════════════════════════════════════════════════════════════
+
+- id: io.openleap.ai.autoclaude
+  category: tooling
+  description: Claude Code job runner — REST API for automated code tasks
+  tech: [python-3.12, fastapi, sqlalchemy]
+  build: pip
+  depends_on: []
+  status: active
+  last_activity: 2026-03-20
+
+- id: io.openleap.nightagent
+  category: tooling
+  description: Docker sandbox for autonomous Claude Code execution
+  tech: [python-3.12, docker]
+  build: docker
+  depends_on: []
+  status: active
+  last_activity: 2026-03-05
+
+- id: io.openleap.customize
+  category: tooling
+  description: White-label customization script for domain services
+  tech: [python-3.7]
+  build: none
+  depends_on: []
+  status: active
+  last_activity: 2026-03-11
+
+- id: io.openleap.tech.zugferd
+  category: tooling
+  description: ZUGFeRD e-invoicing library — German electronic invoicing standard
+  tech: [java-25]
+  build: maven
+  depends_on: []
+  status: active
+  last_activity: 2026-03-10
+
+- id: io.openleap.template
+  category: tooling
+  description: Microservice template — scaffolding for new backend services
+  tech: [java-25, spring-boot-4]
+  build: maven
+  depends_on: [io.openleap.parent]
+  status: active
+  last_activity: 2026-03-13
+
+- id: io.openleap.gateway
+  category: backend-service
+  description: API Gateway — central entry point for microservice network
+  tech: [java-25, spring-boot-4]
+  build: maven
+  depends_on: [io.openleap.parent]
+  status: active
+  last_activity: 2026-03-11
+
+- id: io.openleap.workflows
+  category: tooling
+  description: Reusable GitHub Actions workflows
+  tech: [yaml]
+  build: none
+  depends_on: []
+  status: active
+  last_activity: 2026-03-20
+
+- id: io.openleap.bruno-collections
+  category: tooling
+  description: Bruno REST client API test collections
+  tech: [json]
+  build: none
+  depends_on: []
+  status: active
+
+# ═══════════════════════════════════════════════════════════════════
+# INFRASTRUCTURE
+# ═══════════════════════════════════════════════════════════════════
+
+- id: io.openleap.k8s
+  category: infrastructure
+  description: Kubernetes manifests, ArgoCD, observability stack, mkdocs deployment docs
+  tech: [yaml, docker]
+  build: docker
+  depends_on: []
+  status: active
+  last_activity: 2026-03-11
+
+- id: io.openleap.iac
+  category: infrastructure
+  description: Docker compose framework for IAC
+  tech: [docker]
+  build: docker
+  depends_on: []
+  status: maintained
+  last_activity: 2025-11-21
+
+- id: io.openleap.infra
+  category: infrastructure
+  description: Infrastructure provisioning scripts
+  tech: [docker]
+  build: docker
+  depends_on: []
+  status: stale
+  notes: Not a git repo — minimal content

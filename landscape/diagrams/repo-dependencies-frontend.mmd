@@ -1,0 +1,40 @@
+%% OpenLeap Frontend Repository Dependencies
+%% Solid arrow = uses ui.base (full platform layer)
+%% Dashed arrow = uses ui.kit only (components without platform shell)
+
+flowchart TD
+    subgraph Foundation
+        UIKIT[io.openleap.ui.kit<br/>6 packages: core, tokens,<br/>components, enterprise,<br/>composables, nuxt]
+        UIBASE[io.openleap.ui.base<br/>Shared Nuxt Layer<br/>Auth · Permissions · Shell]
+    end
+
+    UIKIT --> UIBASE
+
+    subgraph Full["Product UIs — ui.base + ui.kit"]
+        ELARAUI[elara.ui<br/>Business Discovery<br/>Nuxt 4]
+        IAMUI[iam.ui<br/>IAM Console<br/>Nuxt 4]
+        DMSUI[tech.dms.ui<br/>Document Mgmt<br/>Nuxt 4]
+    end
+
+    UIBASE --> ELARAUI & IAMUI & DMSUI
+    UIKIT --> ELARAUI & IAMUI & DMSUI
+
+    subgraph KitOnly["Product UIs — ui.kit only"]
+        TELOSUI[telos.ui<br/>Spec Management<br/>Nuxt 4]
+        DPSUI[dps.ui<br/>Data Portability<br/>Nuxt 3 ⚠️]
+        ACUI[ai.autoclaude.ui<br/>Job Monitor<br/>Nuxt 4]
+    end
+
+    UIKIT -.-> TELOSUI & DPSUI & ACUI
+
+    subgraph Standalone["Standalone UIs"]
+        NAUTUI[nautilos.ui<br/>Dashboard<br/>Vite — no Nuxt]
+    end
+
+    classDef active fill:#c6efce,stroke:#006100
+    classDef maintained fill:#ffeb9c,stroke:#9c5700
+    classDef warning fill:#ffe0b2,stroke:#e65100
+
+    class UIKIT,UIBASE,ELARAUI,IAMUI,DMSUI,TELOSUI,ACUI active
+    class NAUTUI maintained
+    class DPSUI warning

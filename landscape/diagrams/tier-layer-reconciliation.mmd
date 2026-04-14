@@ -1,0 +1,66 @@
+%% OpenLeap Conceptual Reconciliation
+%% Maps: 4-Tier Service Model × 5-Layer Specification Model × 3-Space Perspective
+
+flowchart TB
+    %% ════════════════════════════════════════════
+    %% Problem Space (Elara)
+    %% ════════════════════════════════════════════
+    subgraph PROB["PROBLEM SPACE — Elara"]
+        direction TB
+        BPL["Business Process Layer<br/>─────────────────<br/>BPMN processes, actors,<br/>glossary, business rules, KPIs"]
+        CON["Conceptual Layer<br/>─────────────────<br/>Domains, requirements,<br/>workflow candidates"]
+    end
+
+    BPL --> CON
+
+    %% ════════════════════════════════════════════
+    %% Conceptual Freeze (handoff)
+    %% ════════════════════════════════════════════
+    CON -->|"Conceptual Freeze<br/>(Perspektivwechsel)"| SUITE_L
+    CON -->|"Conceptual Freeze"| SYS_L
+
+    %% ════════════════════════════════════════════
+    %% Solution Space (Telos)
+    %% ════════════════════════════════════════════
+    subgraph SOL["SOLUTION SPACE — Telos"]
+        direction TB
+
+        subgraph TWIN["Suite ↔ System (orthogonal)"]
+            direction LR
+            SUITE_L["Suite Layer (logical)<br/>─────────────────<br/>UBL, domain model,<br/>service landscape, ADRs<br/>──<br/>Maps to: T2 + T3"]
+            SYS_L["System Layer (technical)<br/>─────────────────<br/>Infra specs, tech ADRs,<br/>deployment, pipelines<br/>──<br/>Maps to: T1 + T4"]
+        end
+
+        SVC_L["Service Layer<br/>─────────────────<br/>API contracts, events, entities,<br/>business rules, data model<br/>──<br/>Maps to: T1 + T2 + T3 + T4"]
+    end
+
+    SUITE_L --> SVC_L
+    SYS_L --> SVC_L
+
+    %% ════════════════════════════════════════════
+    %% Product Space (Elara + Telos + UI-SPLE)
+    %% ════════════════════════════════════════════
+    subgraph PRODUCT["PRODUCT SPACE — Elara + Telos + UI-SPLE"]
+        direction LR
+        PC["ProductConfig<br/>(Elara)<br/>Feature selection,<br/>personas, navigation"]
+        FS["Feature Specs<br/>(Telos)<br/>Journey, screens,<br/>backend deps, a11y"]
+        UVL["Feature UVL<br/>(UI-SPLE)<br/>Variability tree,<br/>binding times,<br/>absent-rules"]
+    end
+
+    SUITE_L -.->|"features owned<br/>by suite"| FS
+    SVC_L -.->|"backend deps"| FS
+    CON -.->|"feature candidates"| PC
+    FS --> UVL
+
+    %% ════════════════════════════════════════════
+    %% Tier overlay (right side annotations)
+    %% ════════════════════════════════════════════
+
+    classDef problem fill:#e3f2fd,stroke:#1565c0
+    classDef solution fill:#e8f5e9,stroke:#2e7d32
+    classDef product fill:#fff3e0,stroke:#e65100
+    classDef freeze fill:#fce4ec,stroke:#c62828
+
+    class BPL,CON problem
+    class SUITE_L,SYS_L,SVC_L solution
+    class PC,FS,UVL product

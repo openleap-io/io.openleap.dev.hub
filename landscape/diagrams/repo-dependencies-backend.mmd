@@ -1,0 +1,72 @@
+%% OpenLeap Backend Repository Dependencies
+%% Nodes colored by status: green=active, yellow=maintained, red=stale
+
+flowchart TD
+    subgraph Foundation
+        PARENT[io.openleap.parent<br/>Maven BOM<br/>Java 25 / Spring Boot 4.0.2]
+        STARTER[io.openleap.starter<br/>core-service 3.0.3-SNAPSHOT]
+        NFS[io.openleap.common.nfs<br/>News Feed Starter]
+    end
+
+    PARENT --> STARTER
+    PARENT --> NFS
+    STARTER --> NFS
+
+    subgraph IAM[IAM Services — T1]
+        PRINCIPAL[iam.principal]
+        AUTHZ[iam.authz]
+        TENANT[iam.tenant]
+        AUDIT[iam.audit]
+    end
+
+    PARENT --> PRINCIPAL & AUTHZ & TENANT & AUDIT
+    STARTER --> PRINCIPAL & AUTHZ & TENANT & AUDIT
+
+    subgraph T1[Platform — T1]
+        DMS[tech.dms<br/>Document Mgmt]
+        REF[t1.ref<br/>Reference Data]
+        CFG[t1.cfg<br/>Configuration]
+        I18N[t1.i18n<br/>Internationalization]
+        JC[t1.jc<br/>Job Control]
+    end
+
+    STARTER -.->|uses starter<br/>but not parent| DMS
+    PARENT --> REF & CFG & I18N & JC
+    STARTER --> REF & CFG & I18N & JC
+
+    subgraph T2[Shared Business — T2]
+        BP[shared.bp<br/>Business Partner]
+    end
+
+    PARENT --> BP
+
+    subgraph T3[Domain Services — T3]
+        FIGL[fi.gl<br/>General Ledger]
+        FIAP[fi.ap<br/>Accounts Payable]
+        FIAR[fi.ar<br/>Accounts Receivable]
+        FIACC[fi.acc<br/>Accounting Core]
+        FIBANK[fi.bank<br/>Banking]
+        FISLC[fi.slc<br/>Subledger Core]
+        PURSUP[pur.sup<br/>Supplier Catalog]
+    end
+
+    PARENT --> FIGL & FIAP & FIAR & FIACC & FIBANK & FISLC & PURSUP
+    STARTER --> FIGL
+
+    subgraph Agora[Agora Platform — no parent POM]
+        TELOS[telos<br/>Spec Management]
+        TELOSAI[telos.ai<br/>AI Layer]
+        ELARA[elara<br/>Discovery]
+        NOA[noa<br/>AI Intelligence]
+        DPS[dps<br/>GDPR Portability]
+    end
+
+    TELOS --> TELOSAI
+
+    classDef active fill:#c6efce,stroke:#006100
+    classDef maintained fill:#ffeb9c,stroke:#9c5700
+    classDef stale fill:#ffc7ce,stroke:#9c0006
+
+    class PARENT,STARTER,NFS,PRINCIPAL,AUTHZ,TENANT,AUDIT,DMS,REF,CFG,I18N,JC,BP,FIGL active
+    class TELOS,TELOSAI,FIAP,FIAR,FIACC,FIBANK,FISLC,PURSUP maintained
+    class ELARA,NOA,DPS stale
