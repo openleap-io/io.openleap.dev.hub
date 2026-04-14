@@ -85,7 +85,7 @@ Governs deployment topology and dependency direction. Higher tiers may depend on
 └─────────────────────────────────────────────────────────────┘
 ```
 
-See [`SYSTEM_OVERVIEW.md`](SYSTEM_OVERVIEW.md) for the complete domain map and event flow diagram.
+See [`system-topology.md`](system-topology.md) for the complete domain map and event flow diagram.
 
 ### 3.2 Five-Layer Specification Model (Authoring)
 
@@ -278,7 +278,7 @@ UI-SPLE applies the Cameleon Reference Framework with a pragmatic two-layer appr
 
 ### 9.1 Repository Ecosystem
 
-39 repositories organized in 8 categories. For the complete inventory and dependency graphs, see [`landscape/REPO_LANDSCAPE.md`](../landscape/REPO_LANDSCAPE.md).
+39 repositories organized in 8 categories. For the complete inventory and dependency graphs, see [`landscape/repo-landscape.md`](../landscape/repo-landscape.md).
 
 ```
 io.openleap.spec                    ← You are here (specifications)
@@ -388,7 +388,7 @@ Key terms quick reference:
 | Conceptual stack | [`dev.concepts/CONCEPTUAL_STACK.md`](https://github.com/openleap-io/io.openleap.dev.concepts/blob/main/CONCEPTUAL_STACK.md) — Agora platform model |
 | Spec templates | [`dev.concepts/templates/`](https://github.com/openleap-io/io.openleap.dev.concepts/tree/main/templates) — specification authoring templates |
 | Term definitions | [`dev.concepts/RECONCILIATION.md`](https://github.com/openleap-io/io.openleap.dev.concepts/blob/main/RECONCILIATION.md) — unified glossary |
-| Repository inventory | [`landscape/REPO_LANDSCAPE.md`](../landscape/REPO_LANDSCAPE.md) |
-| Repository metadata | [`landscape/REPO_CATALOG.yaml`](../landscape/REPO_CATALOG.yaml) |
+| Repository inventory | [`landscape/repo-landscape.md`](../landscape/repo-landscape.md) |
+| Repository metadata | [`landscape/repo-catalog.yaml`](../landscape/repo-catalog.yaml) |
 | Backend dev guidelines | [`dev.guidelines`](https://github.com/openleap-io/io.openleap.dev.guidelines) |
 | Frontend dev guidelines | [`ui.guidelines`](https://github.com/openleap-io/io.openleap.ui.guidelines) |

@@ -14,7 +14,7 @@ OpenLeap is a specification-driven ERP platform built on microservices. It provi
 - An **AI-powered toolchain** (Agora: Elara + Telos + Noa) for discovery, specification, and code generation
 - A **Product Line Engineering** approach for configuring customer-specific products from a shared feature catalog
 
-For the full architecture overview, see [architecture/GESAMTSICHT.md](architecture/GESAMTSICHT.md).
+For the SPLE platform model, see [architecture/sple-platform-concept.md](architecture/sple-platform-concept.md). For the full architecture overview, see [architecture/integrated-overview.md](architecture/integrated-overview.md).
 
 ---
 
@@ -132,7 +132,7 @@ Organized by suite using the four-tier architecture.
 └─────────────────────────────────────────────────────────────┘
 ```
 
-For the complete architecture with event flows and Mermaid diagrams, see [architecture/SYSTEM_OVERVIEW.md](architecture/SYSTEM_OVERVIEW.md).
+For the complete architecture with event flows and Mermaid diagrams, see [architecture/system-topology.md](architecture/system-topology.md).
 
 ### Tech Stack
 
@@ -170,17 +170,18 @@ For the complete architecture with event flows and Mermaid diagrams, see [archit
 
 ### Architecture
 
-- [architecture/GESAMTSICHT.md](architecture/GESAMTSICHT.md) — Integrated architecture overview (Gesamtsicht)
-- [architecture/OPENLEAP_PLATFORM_GENERAL.md](architecture/OPENLEAP_PLATFORM_GENERAL.md) — Four-tier architecture, suites, communication patterns
-- [architecture/SYSTEM_OVERVIEW.md](architecture/SYSTEM_OVERVIEW.md) — System topology with Mermaid diagrams
+- [architecture/sple-platform-concept.md](architecture/sple-platform-concept.md) — SPLE model: Platform Engineering, Application Engineering, and the specification artifacts that bridge them
+- [architecture/integrated-overview.md](architecture/integrated-overview.md) — Integrated architecture overview (data, communication, AI tooling)
+- [architecture/four-tier-architecture.md](architecture/four-tier-architecture.md) — Four-tier architecture, suites, communication patterns
+- [architecture/system-topology.md](architecture/system-topology.md) — System topology with Mermaid diagrams
 
 ### Landscape
 
-- [landscape/REPO_LANDSCAPE.md](landscape/REPO_LANDSCAPE.md) — Repository inventory and dependency graph
-- [landscape/REPO_CATALOG.yaml](landscape/REPO_CATALOG.yaml) — Machine-readable repository metadata
-- [landscape/INTEGRATION_MAP.md](landscape/INTEGRATION_MAP.md) — Platform integration flows and API contract mappings
-- [landscape/specification-status.json](landscape/specification-status.json) — Spec completeness per domain/service
-- [landscape/implementation-status.json](landscape/implementation-status.json) — Implementation status across repos
+- [landscape/repo-landscape.md](landscape/repo-landscape.md) — Repository inventory and dependency graph
+- [landscape/repo-catalog.yaml](landscape/repo-catalog.yaml) — Machine-readable repository metadata
+- [landscape/integration-map.md](landscape/integration-map.md) — Platform integration flows and API contract mappings
+- [landscape/spec-status.json](landscape/spec-status.json) — Spec completeness per domain/service
+- [landscape/impl-status.json](landscape/impl-status.json) — Implementation status across repos
 
 ### Diagrams
 
@@ -197,9 +198,9 @@ For the complete architecture with event flows and Mermaid diagrams, see [archit
 ### New to OpenLeap?
 
 1. Read this README for the high-level picture
-2. Read [architecture/GESAMTSICHT.md](architecture/GESAMTSICHT.md) for the full architecture
+2. Read [architecture/integrated-overview.md](architecture/integrated-overview.md) for the full architecture
 3. Browse the [naming strategy](naming/repo-naming-strategy.md) to understand repo organisation
-4. Check [landscape/REPO_LANDSCAPE.md](landscape/REPO_LANDSCAPE.md) for the full repo inventory
+4. Check [landscape/repo-landscape.md](landscape/repo-landscape.md) for the full repo inventory
 
 ### Building a new service?
 
