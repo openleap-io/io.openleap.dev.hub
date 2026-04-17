@@ -250,11 +250,12 @@ Platform Catalog (catalog.uvl)
 
 ### 8.2 Product Configuration (Elara — Application Engineering)
 
-Products are assembled in Elara by selecting features from the catalog and resolving variability.
+Products are assembled in Elara by selecting features from the catalog and resolving variability. The resulting specification is exported to a Git-backed product repository (`io.openleap.prod.{product}`) for review, versioning, and release — Elara is the authoring UI, the repo is the system of record. See [product-repo-layout.md](../architecture/product-repo-layout.md) for the full repository convention.
 
 | Concept | Definition |
 |---------|-----------|
-| Product | UI face of a single T3 suite. Multiple products per suite possible. |
+| Product | Composition of platform features serving one or more personas. May span multiple suites (e.g. a Sales Workbench drawing from SD, BP, FI, PPS). |
+| Product spec repo | `io.openleap.prod.{product}` — Git-tracked ProductConfig, extensions, personas, processes, screen overrides. |
 | Feature inclusion | `full`, `read-only`, `embedded`, or `excluded` |
 | Cross-suite features | T2 features freely included. Other suite's T3 features only `read-only`. |
 | Variability resolution | Attributes set per binding time: `compile`, `deploy`, `runtime` |
@@ -373,7 +374,7 @@ Key terms quick reference:
 | **Space** | Lifecycle perspective (Problem/Solution/Product) |
 | **Suite** | Logical grouping of T3 domain services. Owns features. |
 | **Domain** | Bounded context within a suite. Maps to one microservice. |
-| **Product** | UI face of a single suite. Selects features, assigns personas. |
+| **Product** | Composition of platform features serving one or more personas. May span multiple suites. Spec lives in `io.openleap.prod.{product}`. |
 | **Feature** | Suite-owned capability. Three views: Candidate (Elara) → Spec (Telos) → UVL (UI-SPLE) |
 | **Conceptual Freeze** | Formal handoff artifact from Elara to Telos |
 

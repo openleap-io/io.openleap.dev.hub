@@ -161,15 +161,15 @@ Start with the first pattern; migrate to the second when duplication becomes pai
 
 ---
 
-## 8. Required Updates Elsewhere (Follow-Up)
+## 8. Related Edits and Follow-Ups
 
-Adopting this convention implies follow-up edits in other documents. They are noted here but are out of scope for the doc that introduces the convention:
+Adopting this convention requires aligned updates elsewhere. Status as of this document:
 
-1. [naming/repo-naming-strategy.md](../naming/repo-naming-strategy.md) — add the `prod` infix to the category table *(done in the same change as this document)*.
-2. [sple-platform-concept.md §3.1](sple-platform-concept.md) — Product definition currently says "a composed UI application"; point at this document.
-3. [integrated-overview.md §8.2](integrated-overview.md) — clarify that ProductConfig is authored in Elara *and* persisted in `io.openleap.prod.{product}` for Git-backed review.
-4. [landscape/repo-catalog.yaml](../landscape/repo-catalog.yaml) — add a `product-spec` category alongside `product-ui`.
-5. `dev.concepts` — add templates for `product.yaml`, `selection.uvl`, `bindings.yaml`, `extensions/*`, persona, process.
+1. [naming/repo-naming-strategy.md](../naming/repo-naming-strategy.md) — `prod` infix added to the category table, mental-model, and namespace section. **Done.**
+2. [sple-platform-concept.md §3.1](sple-platform-concept.md) — Product definition aligned with this repository convention. **Done.**
+3. [integrated-overview.md §8.2](integrated-overview.md) and glossary — ProductConfig persistence in `io.openleap.prod.{product}` documented; Product glossary entry corrected. **Done.**
+4. [landscape/repo-catalog.yaml](../landscape/repo-catalog.yaml) — `product-spec` and `product-bff` categories added to the header; reserved section added for future `prod.*` entries. **Done.**
+5. `dev.concepts` — templates for `product.yaml`, `selection.uvl`, `bindings.yaml`, `extensions/*`, persona, process. **Pending in [`io.openleap.dev.concepts`](https://github.com/openleap-io/io.openleap.dev.concepts).** Out of scope for `dev.hub`: the spec-template system lives in that repo and must be extended there so the templates become discoverable alongside the existing `feature-spec`, `domain-service-spec`, etc.
 
 ---
 

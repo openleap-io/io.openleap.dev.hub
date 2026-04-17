@@ -124,9 +124,9 @@ Application Engineering takes the platform catalog and assembles specific produc
 
 ### 3.1 Products
 
-A **Product** is a composed UI application that serves one or more personas. Products are independent of suites — a "Sales Workbench" product might include features from SD, BP, FI, and PPS.
+A **Product** is a composed application — spec, UI, and runtime BFF — that serves one or more personas. Products are independent of suites: a "Sales Workbench" product might include features from SD, BP, FI, and PPS.
 
-Product composition is customer-driven: a product owner selects features from the platform catalog based on the customer's processes and personas. This happens in Elara.
+Product composition is customer-driven: a product owner selects features from the platform catalog based on the customer's processes and personas. Authoring happens in Elara; the resulting specification is persisted as a Git repository (`io.openleap.prod.{product}`) so it can be reviewed, versioned, and released. See [product-repo-layout.md](product-repo-layout.md) for the full repository convention.
 
 ### 3.2 Product-Features
 

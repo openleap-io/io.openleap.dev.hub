@@ -3,8 +3,11 @@
 # Total: 56 repositories
 #
 # Categories: specification, backend-service, shared-library, parent-pom,
-#             product-ui, component-library, shared-layer, guidelines,
-#             tooling, infrastructure
+#             product-spec, product-ui, product-bff, component-library,
+#             shared-layer, guidelines, tooling, infrastructure
+#
+# Product repositories follow the prod.* naming convention. See
+# architecture/product-repo-layout.md for the full layout.
 #
 # Status: active (commits within last 30 days), maintained (commits within 90 days),
 #         stale (no recent commits or not a git repo), archived (superseded)
@@ -376,6 +379,17 @@
   depends_on: []
   status: stale
   notes: Not a git repo
+
+# ═══════════════════════════════════════════════════════════════════
+# PRODUCT — SPECIFICATIONS
+# ═══════════════════════════════════════════════════════════════════
+# Customer- or market-derived product specs. Shape defined in
+# architecture/product-repo-layout.md. No repos exist yet — this
+# section is reserved for future io.openleap.prod.{product} entries
+# and their optional io.openleap.prod.{product}.bff counterparts.
+# In-house tooling UIs (elara.ui, telos.ui, iam.ui, etc.) remain
+# under the FRONTEND — PRODUCT UIs section below; they predate the
+# prod.* convention and are grandfathered.
 
 # ═══════════════════════════════════════════════════════════════════
 # FRONTEND — PRODUCT UIs
