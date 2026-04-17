@@ -49,6 +49,7 @@ Non-domain repos use one of four category infixes:
 | **`ops`** | Operations | Infrastructure-as-code, Kubernetes, CI/CD workflows, platform runtime services (gateway, config, registry) |
 | **`ui`** | UI | Shared UI libraries, design system, UI guidelines, standalone UI applications |
 | **`ai`** | AI | AI and automation tooling |
+| **`prod`** | Product (Application Engineering) | Customer- or market-specific product specs, product UIs, product BFFs. See [architecture/product-repo-layout.md](../architecture/product-repo-layout.md). |
 
 #### Mental model
 
@@ -57,6 +58,7 @@ io.openleap.dev.*       — build it
 io.openleap.ops.*       — run it
 io.openleap.ui.*        — show it
 io.openleap.ai.*        — automate it
+io.openleap.prod.*      — ship it (a product derived from the platform)
 io.openleap.{domain}.*  — the business logic
 ```
 
@@ -233,6 +235,20 @@ io.openleap.dev.archetype    — Maven archetype
 io.openleap.dev.bruno        — API test collections
 io.openleap.dev.customize    — Customization tooling
 ```
+
+---
+
+## `prod.*` Namespace
+
+Product repos follow a three-repo pattern per product. See [architecture/product-repo-layout.md](../architecture/product-repo-layout.md) for the full layout.
+
+```
+io.openleap.prod.{product}           — Product specification (Git-reviewed)
+io.openleap.prod.{product}.ui        — Product frontend (Nuxt 4 / Vue 3)
+io.openleap.prod.{product}.bff       — Product BFF (optional)
+```
+
+`{product}` is a short kebab-case identifier (e.g. `acme-sales`). In-house platform tooling UIs (`elara.ui`, `telos.ui`, `iam.ui`, `tech.dms.ui`, etc.) predate this convention and remain under their existing namespaces — `prod.*` applies to customer- or market-derived products going forward.
 
 ---
 
