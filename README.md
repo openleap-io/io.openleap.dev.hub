@@ -209,6 +209,13 @@ For the complete architecture with event flows and Mermaid diagrams, see [archit
 3. Use the [dev.template](https://github.com/openleap-io/io.openleap.dev.template) or [dev.archetype](https://github.com/openleap-io/io.openleap.dev.archetype) to scaffold
 4. Reference [dev.concepts](https://github.com/openleap-io/io.openleap.dev.concepts) for specification templates
 
+### Designing a product?
+
+1. Read [architecture/sple-platform-concept.md](architecture/sple-platform-concept.md) for the two-lifecycle model
+2. Walk through [architecture/getting-started-product.md](architecture/getting-started-product.md) — end-to-end worked examples (CRM Workbench + Ticket Desk)
+3. Use [architecture/product-repo-layout.md](architecture/product-repo-layout.md) for the `io.openleap.prod.{product}` repo shape
+4. Author in Elara; export to a `prod.*` repo for review and release
+
 ### Working on the UI?
 
 1. Read the [ui.guidelines](https://github.com/openleap-io/io.openleap.ui.guidelines) for frontend standards

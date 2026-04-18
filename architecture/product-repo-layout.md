@@ -175,6 +175,7 @@ Adopting this convention requires aligned updates elsewhere. Status as of this d
 
 ## 9. Related Documents
 
+- [getting-started-product.md](getting-started-product.md) — end-to-end walkthrough from product idea to release, with CRM Workbench and Ticket Desk worked examples
 - [sple-platform-concept.md](sple-platform-concept.md) — two-lifecycle model, platform-feature specification artifacts, extension points
 - [integrated-overview.md](integrated-overview.md) — full architecture overview, Product Line Engineering section
 - [four-tier-architecture.md](four-tier-architecture.md) — tier model and suite boundaries
