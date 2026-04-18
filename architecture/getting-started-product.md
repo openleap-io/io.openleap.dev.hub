@@ -82,38 +82,40 @@ Inbound Lead → Qualify → Create Opportunity → Log Activities → Advance S
 
 **Feature Candidates** produced by Elara:
 
-1. Manage Leads
-2. Manage Contacts
+1. Manage Contacts & Accounts
+2. Manage Leads
 3. Manage Opportunities
 4. Log Activities
 5. Send Outbound Email
 6. Pipeline Dashboard (manager view)
 7. See Customer Invoice History (cross-suite read into FI)
-8. See Business Partner master data (cross-suite read into BP)
+8. See Business Partner master data (cross-suite read into shared BP)
 
 ### A.2 Gap Analysis
 
+All IDs below resolve against the current [dev.spec catalog](https://github.com/openleap-io/io.openleap.spec).
+
 | Candidate | Suite | Existing feature? | Action |
 |-----------|-------|-------------------|--------|
-| Manage Leads | CRM | `F-CRM-001` (illustrative) | Select |
-| Manage Contacts | CRM | `F-CRM-002` | Select |
-| Manage Opportunities | CRM | `F-CRM-003` | Select |
-| Log Activities | CRM | `F-CRM-004` | Select |
-| Send Outbound Email | CRM | `F-CRM-005` | Select |
-| Pipeline Dashboard | CRM | `F-CRM-010` (assumes an analytics feature exists) | Select |
-| Customer Invoice History | FI | `F-FI-007` (cross-suite read, read-only inclusion) | Select read-only |
-| Business Partner master data | BP (T2) | `F-BP-001` (T2 shared kernel) | Select |
+| Manage Contacts & Accounts | CRM | `F-CRM-001` (crm.contact) | Select |
+| Manage Leads | CRM | `F-CRM-002` (crm.lead) | Select |
+| Manage Opportunities | CRM | `F-CRM-003` (crm.opportunity) | Select |
+| Log Activities | CRM | `F-CRM-004` (crm.activity) | Select |
+| Send Outbound Email | CRM | `F-CRM-007` (crm.email) | Select |
+| Pipeline Dashboard | CRM | `F-CRM-014` Sales Forecast & Pipeline Analytics (crm.analytics) | Select |
+| Customer Invoice History | FI | `F-FI-001` Journal Entry (fi.gl) — closest analogue; read-only inclusion | Select read-only |
+| Business Partner master data | shared (T2) | no feature — BP is a shared-kernel capability exposed by `io.openleap.shared.bp` | Reference from feature services; no F-ID required |
 
-All candidates map to the existing catalog. No gaps. Proceed to §A.3.
+All CRM candidates map to the existing catalog. The FI read lands on Journal Entry (the invoice-history idea from the interview maps to the available journal view). BP has no feature ID because it is a shared-kernel service rather than a catalog feature; product services reference it directly (e.g. `/api/shared/bp/v1/parties`). Proceed to §A.3.
 
 ### A.3 Drafting `io.openleap.prod.crm-workbench`
 
-The layout matches [product-repo-layout.md §3](product-repo-layout.md).
+The layout matches [product-repo-layout.md §3](product-repo-layout.md). A full reference instantiation lives at [`openleap-io/io.openleap.prod.crm-workbench`](https://github.com/openleap-io/io.openleap.prod.crm-workbench); the extract below is deliberately simplified for walkthrough purposes.
 
 **`product.yaml`**
 
 ```yaml
-id: prod.crm-workbench
+id: crm-workbench
 name: CRM Workbench
 owner: team-sales-platform
 target-customer: acme-services
@@ -131,52 +133,56 @@ processes:
 features
     Product "CRM Workbench"
         mandatory
-            F-CRM-001  "Manage Leads"
-            F-CRM-002  "Manage Contacts"
-            F-CRM-003  "Manage Opportunities"
-            F-CRM-004  "Log Activities"
-            F-BP-001   "Business Partner"          // T2 — freely included
+            F-CRM-001  "Contact & Account Management"
+            F-CRM-002  "Lead Management"
+            F-CRM-003  "Opportunity Management"
+            F-CRM-004  "Activity Tracking"
         optional
-            F-CRM-005  "Send Outbound Email"
-            F-CRM-010  "Pipeline Dashboard"
-            F-FI-007   "Customer Invoice History"  // cross-suite, read-only
+            F-CRM-007  "Email"
+            F-CRM-014  "Sales Forecast / Pipeline Analytics"
+            F-FI-001   "Journal Entry"              // cross-suite, read-only
 
     inclusion-modes
-        F-FI-007 : read-only                        // mutate-local rule, see §5 below
+        F-FI-001 : read-only                        // mutate-local rule, see §5 below
 
     constraints
-        F-CRM-001 requires F-BP-001                 // leads need a BP record
-        F-CRM-003 requires F-CRM-002                // opportunities need contacts
+        F-CRM-002 requires F-CRM-001                // leads attach to an account/contact
+        F-CRM-003 requires F-CRM-001                // opportunities attach to an account
+        F-CRM-007 requires F-CRM-004                // email is a kind of activity
 ```
+
+Business Partner master data is consumed directly from `io.openleap.shared.bp` (`/api/shared/bp/v1/parties`) rather than selected as a feature — it is a shared kernel, not a catalog feature.
 
 **`variability/bindings.yaml`**
 
 ```yaml
 bindings:
-  F-CRM-001:
-    lead-scoring-model: "linear"        # attribute; binding: compile
-    max-open-leads-per-rep: 200         # binding: deploy
-  F-CRM-005:
-    email-provider: "smtp"              # binding: deploy
-    daily-send-cap: 500                 # binding: runtime
+  F-CRM-002:
+    scoring.model: "linear"             # attribute; binding: compile
+    capacity.maxOpenLeadsPerRep: 200    # binding: deploy
+  F-CRM-007:
+    provider.transport: "smtp"          # binding: deploy
+    throttle.dailySendCap: 500          # binding: runtime
 ```
 
 **Small extension — custom field on Lead**
 
-`F-CRM-001` declares an extension point `custom-fields` on the Lead aggregate. Acme wants to capture `source-campaign-id`:
+`F-CRM-002` declares an extension point `ext.leadCreate.customFields` on the Lead aggregate. Acme wants to capture `sourceCampaignId`:
 
-`extensions/F-CRM-001/fields.yaml`:
+`extensions/F-CRM-002/fields.yaml`:
 
 ```yaml
-aggregate: Lead
-custom-fields:
-  - name: source-campaign-id
-    type: string
-    required: false
-    index: true
-    ui:
-      label: "Campaign"
-      zone: lead-entry.details
+extensions:
+  - extensionPointId: "ext.leadCreate.customFields"
+    fields:
+      - id: sourceCampaignId
+        label: "Source campaign"
+        type: string
+        required: false
+        uiHint: combobox
+        lookup:
+          source: internal
+          endpoint: /api/crm/mkt/v1/campaigns
 ```
 
 **Personas and processes**
@@ -205,20 +211,19 @@ device-mix: { desktop: 0.8, mobile: 0.2 }
 2. **CI packages** `bff/productconfig.yaml` from the selection + bindings + extensions:
 
 ```yaml
-product-id: prod.crm-workbench
+product-id: crm-workbench
 version: 0.1.0
 features:
-  F-CRM-001: { mode: full,      bindings: { lead-scoring-model: linear, max-open-leads-per-rep: 200 } }
-  F-CRM-002: { mode: full }
+  F-CRM-001: { mode: full }
+  F-CRM-002: { mode: full, bindings: { scoring.model: linear, capacity.maxOpenLeadsPerRep: 200 } }
   F-CRM-003: { mode: full }
   F-CRM-004: { mode: full }
-  F-CRM-005: { mode: full,      bindings: { email-provider: smtp, daily-send-cap: 500 } }
-  F-CRM-010: { mode: full }
-  F-BP-001:  { mode: full }
-  F-FI-007:  { mode: read-only }
+  F-CRM-007: { mode: full, bindings: { provider.transport: smtp, throttle.dailySendCap: 500 } }
+  F-CRM-014: { mode: full }
+  F-FI-001:  { mode: read-only }
 extensions:
-  F-CRM-001:
-    custom-fields: { source-campaign-id: { type: string, index: true } }
+  F-CRM-002:
+    customFields: { sourceCampaignId: { type: string, lookup: /api/crm/mkt/v1/campaigns } }
 ```
 
 3. **Build and deploy** `io.openleap.prod.crm-workbench.ui` (reads from its paired BFF, not platform services directly).
