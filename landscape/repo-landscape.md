@@ -158,27 +158,52 @@ flowchart TD
 
 Which specs live where and what is canonical.
 
+**Canonical repo:** `io.openleap.dev.spec/` (the former `io.openleap.spec` is deprecated).
+
 | Domain | Canonical Spec | Local Spec in Service Repo |
 |--------|---------------|---------------------------|
-| ref (T1) | `spec/T1_Platform/ref/` | — |
-| si (T1) | `spec/T1_Platform/si/` | — |
-| dms (T1) | `spec/T1_Platform/dms/` | `io.openleap.tech.dms/spec/` |
-| cfg (T1) | `spec/T1_Platform/cfg/` | — |
-| i18n (T1) | `spec/T1_Platform/i18n/` | — |
-| jc (T1) | `spec/T1_Platform/jc/` | — |
-| IAM (T1) | `spec/T1_Platform/IAM/` | `io.openleap.iam.*/` (per service) |
-| bp (T2) | `spec/T2_SharedBusiness/` | — |
-| fi/gl (T3) | `spec/T3_Domains/FI/` | — |
-| fi/ap (T3) | `spec/T3_Domains/FI/` | — |
-| hr (T3) | `spec/T3_Domains/HR/` | — |
-| pps/* (T3) | `spec/T3_Domains/PPS/` | — |
-| sd (T3) | `spec/T3_Domains/SD/` | — |
-| ps (T3) | `spec/T3_Domains/PS/` | — |
-| bi (T4) | `spec/T4_Data/bi/` | — |
+| param/ref (T1) | `T1_Platform/param/domain-specs/param_ref-spec.md` | — |
+| param/si (T1) | `T1_Platform/param/domain-specs/param_si-spec.md` | — |
+| param/cfg (T1) | `T1_Platform/param/domain-specs/param_cfg-spec.md` | — |
+| param/i18n (T1) | `T1_Platform/param/domain-specs/param_i18n-spec.md` | — |
+| tech/dms (T1) | `T1_Platform/tech/domain-specs/tech_dms-spec.md` | `io.openleap.tech.dms/spec/` |
+| tech/jc (T1) | `T1_Platform/tech/domain-specs/tech_jc-spec.md` | — |
+| tech/nfs (T1) | `T1_Platform/tech/domain-specs/tech_nfs-spec.md` | — |
+| tech/rpt (T1) | `T1_Platform/tech/domain-specs/tech_rpt-spec.md` | — |
+| tech/zugferd (T1) | `T1_Platform/tech/domain-specs/tech_zugferd-spec.md` | — |
+| tech/search (T1) | `T1_Platform/tech/domain-specs/tech_search-spec.md` | `io.openleap.tech.search/` (planned) — supersedes `crm.search` |
+| tech/email (T1) | `T1_Platform/tech/domain-specs/tech_email-spec.md` | `io.openleap.tech.email/` (planned) — supersedes `crm.email` |
+| tech/ai (T1) | `T1_Platform/tech/domain-specs/tech_ai-spec.md` | `io.openleap.tech.ai/` (planned, new) |
+| iam/* (T1) | `T1_Platform/iam/domain-specs/` | `io.openleap.iam.*/` (per service) |
+| bp (T2) | `T2_SharedBusiness/domain-specs/` | — |
+| cap (T2) | `T2_SharedBusiness/domain-specs/` | `io.openleap.shared.cap/` |
+| shared/ntf (T2) | `T2_SharedBusiness/domain-specs/shared_ntf-spec.md` | `io.openleap.shared.ntf/` (planned) — supersedes `crm.ntf` |
+| shared/wf (T2) | `T2_SharedBusiness/domain-specs/shared_wf-spec.md` | `io.openleap.shared.wf/` (planned) — supersedes `crm.wf` |
+| fi/* (T3) | `T3_Domains/FI/` | per service |
+| crm/* (T3) | `T3_Domains/CRM/` | `io.openleap.crm.*/` (see CRM suite header for DEPRECATED entries) |
+| tks/tkt (T3) | `T3_Domains/TKS/domain-specs/tks_tkt-spec.md` | `io.openleap.tks.tkt/` (planned) |
+| tks/ch (T3) | `T3_Domains/TKS/domain-specs/tks_ch-spec.md` | `io.openleap.tks.ch/` (planned) |
+| tks/kb (T3) | `T3_Domains/TKS/domain-specs/tks_kb-spec.md` | `io.openleap.tks.kb/` (planned) |
+| tks/cmdb (T3) | `T3_Domains/TKS/domain-specs/tks_cmdb-spec.md` | `io.openleap.tks.cmdb/` (planned) |
+| hr (T3) | `T3_Domains/HR/` | per service |
+| pps/* (T3) | `T3_Domains/PPS/` | per service |
+| sd (T3) | `T3_Domains/SD/` | per service |
+| ps (T3) | `T3_Domains/PS/` | per service |
+| srv (T3) | `T3_Domains/SRV/` | `io.openleap.srv.*/` |
+| bi (T4) | `T4_Data/bi/` | — |
 | telos | `concepts/CONCEPTUAL_STACK.md` | `io.openleap.telos/spec/` |
 | elara | `concepts/CONCEPTUAL_STACK.md` | `io.openleap.elara/spec/` |
 
-**Rule:** `io.openleap.spec/spec/` is the canonical source for all domain specifications. Service repos may contain derived OpenAPI specs for development convenience, but the spec repo takes precedence on conflicts.
+**Rule:** `io.openleap.dev.spec/` is the canonical source for all domain specifications. Service repos may contain derived OpenAPI specs for development convenience, but the spec repo takes precedence on conflicts.
+
+**Deprecated (superseded — grace period 2026-Q3 → Q1-2027):**
+- `crm.ntf` → `shared.ntf`
+- `crm.wf` → `shared.wf`
+- `crm.search` → `tech.search`
+- `crm.email` → `tech.email`
+- `crm.sup` → `tks.tkt` + `tks.kb`
+
+See `T3_Domains/TKS/_tks_suite.md` ADR-TKS-005 for the promotion rationale.
 
 ---
 

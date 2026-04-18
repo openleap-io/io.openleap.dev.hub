@@ -27,16 +27,17 @@ Domain services use short abbreviations as their category infix. These are alrea
 | Category | Domain | Examples |
 |----------|--------|----------|
 | `fi` | Finance | fi.coa, fi.gl, fi.ap, fi.ar, fi.bank |
-| `crm` | CRM | crm.lead, crm.contact, crm.opp |
-| `iam` | Identity & Access | iam.authz, iam.tenant, iam.principal |
+| `crm` | CRM | crm.lead, crm.contact, crm.opp (note: `crm.ntf`, `crm.wf`, `crm.search`, `crm.email`, `crm.sup` are DEPRECATED and being promoted / superseded — see dev.spec) |
+| `tks` | Ticket System | tks.tkt, tks.ch, tks.kb, tks.cmdb |
+| `iam` | Identity & Access | iam.authz, iam.tenant, iam.principal, iam.audit |
 | `ps` | Project Services | ps.prj, ps.bud, ps.tim |
 | `sd` | Sales & Distribution | sd.ord, sd.bil, sd.shp |
 | `srv` | Service Delivery | srv.cas, srv.apt, srv.cat |
 | `pur` | Purchasing | pur.sup |
-| `shared` | Cross-domain shared | shared.bp, shared.cap |
+| `shared` | Cross-domain shared | shared.bp, shared.cap, shared.ntf, shared.wf |
 | `common` | Common utilities | common.data, common.nfs |
 | `t1` | Platform/Tech services | t1.cfg, t1.i18n, t1.jc, t1.ref |
-| `tech` | Technical services | tech.dms, tech.zugferd |
+| `tech` | Technical services | tech.dms, tech.zugferd, tech.search, tech.email, tech.ai |
 | `event` | Event/CDC | event.cdc |
 
 ### Infrastructure Categories
