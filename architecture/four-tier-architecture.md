@@ -141,10 +141,19 @@ Suites group cohesive operational domains. Common suites include:
 
 Access pattern: Rich domain APIs (synchronous) and high-value business events (asynchronous) published per domain.
 
-### 2.4 Tier 4 — Data, Analytics & Integration (T4)
-- bi — Data Platform (data ingestion, curation, analytics serving)
+### 2.4 Tier 4 — Data, Analytics & Data Activation (T4)
 
-Access pattern: Primarily event-driven ingestion from all tiers; may provide HTTP APIs for data products and governed extracts.
+This section is a summary. The full structure — three pillars, ~19 domains, SPLE platform/product split, integration decomposition across T1 + T3 + products, citations — is in [t4-structure.md](t4-structure.md).
+
+Pillars and sample domains:
+
+- **Data Platform** — `t4.lake`, `t4.stream`, `t4.warehouse`, `t4.catalog`, `t4.contracts`, `t4.quality`, `t4.governance`, `t4.privacy`, `t4.mdm`, `t4.sharing`
+- **Analytics & AI** — `t4.metrics`, `t4.bi`, `t4.explore`, `t4.features`, `t4.mlops`, `t4.serving`, `t4.agents` (provisional)
+- **Data Activation** — `t4.reverse`, `t4.products`
+
+Access pattern: Primarily event-driven ingestion from all tiers; curated datasets exposed as data products (ODCS/ODPS contracts); HTTP APIs for data-product access and governed extracts; `t4.reverse` writes back to T3 only via public T3 APIs.
+
+Not in T4: **process integration** (iPaaS, EDI, B2B) decomposes across T1 (technical plumbing), T3 suites (semantic connectors via a proposed `{suite}.int.*` sub-namespace), and `prod.*` repos (customer-specific bindings). See [t4-structure.md §4](t4-structure.md).
 
 
 ## 3. Naming Conventions and Endpoints

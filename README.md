@@ -171,8 +171,11 @@ For the complete architecture with event flows and Mermaid diagrams, see [archit
 ### Architecture
 
 - [architecture/sple-platform-concept.md](architecture/sple-platform-concept.md) — SPLE model: Platform Engineering, Application Engineering, and the specification artifacts that bridge them
+- [architecture/product-repo-layout.md](architecture/product-repo-layout.md) — `io.openleap.prod.{product}` repository convention
+- [architecture/getting-started-product.md](architecture/getting-started-product.md) — From product idea to release, with CRM Workbench and Ticket Desk worked examples
 - [architecture/integrated-overview.md](architecture/integrated-overview.md) — Integrated architecture overview (data, communication, AI tooling)
 - [architecture/four-tier-architecture.md](architecture/four-tier-architecture.md) — Four-tier architecture, suites, communication patterns
+- [architecture/t4-structure.md](architecture/t4-structure.md) — T4 Data, Analytics & Data Activation: three pillars, SPLE split, integration decomposition
 - [architecture/system-topology.md](architecture/system-topology.md) — System topology with Mermaid diagrams
 
 ### Landscape
