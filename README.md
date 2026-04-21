@@ -88,12 +88,16 @@ Organized by suite using the four-tier architecture.
 | **PARAM** | [t1.cfg](https://github.com/openleap-io/io.openleap.t1.cfg), [t1.i18n](https://github.com/openleap-io/io.openleap.t1.i18n), [t1.ref](https://github.com/openleap-io/io.openleap.t1.ref) |
 | **TECH** | [tech.dms](https://github.com/openleap-io/io.openleap.tech.dms), [t1.jc](https://github.com/openleap-io/io.openleap.t1.jc), [t1_rpt](https://github.com/openleap-io/io.openleap.t1_rpt) |
 
-#### T2 — Shared Enterprise Business
+#### T2 — Common (Cross-Suite Capabilities)
 
-| Suite | Domains |
-|-------|---------|
-| **Shared** | [shared.bp](https://github.com/openleap-io/io.openleap.shared.bp), [shared.cap](https://github.com/openleap-io/io.openleap.shared.cap) |
-| **Common** | [common.data](https://github.com/openleap-io/io.openleap.common.data), [common.nfs](https://github.com/openleap-io/io.openleap.common.nfs) |
+Two suites provide cross-suite capabilities consumed by every T3 business domain:
+
+| Suite | Purpose | Domains |
+|-------|---------|---------|
+| **shared** | Cross-domain master data | [shared.bp](https://github.com/openleap-io/io.openleap.shared.bp) (Business Partner), [shared.cap](https://github.com/openleap-io/io.openleap.shared.cap) (Calendar & Planning) |
+| **auto** | Cross-domain automation fabric | [auto.ntf](https://github.com/openleap-io/io.openleap.auto.ntf) (Notification Hub), [auto.wf](https://github.com/openleap-io/io.openleap.auto.wf) (Workflow Engine) *— being promoted from `crm.ntf` / `crm.wf`; 60-day routing-key bridge active* |
+
+> `common.data` and `common.nfs` are **shared Java libraries**, not T2 domain services — see repo-catalog.yaml.
 
 #### T3 — Core Business Suites
 
@@ -115,15 +119,15 @@ Organized by suite using the four-tier architecture.
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │  T1 — Platform & Technical Foundations                       │
-│  IAM, ref, i18n, si, dms, rpt, cfg, jc                     │
+│  IAM, ref, i18n, si, dms, rpt, cfg, jc, search, email, ai   │
 │  Suite-agnostic. Sync lookups. Invisible to business users. │
 ├─────────────────────────────────────────────────────────────┤
-│  T2 — Shared Enterprise Business                             │
-│  bp (Business Partner), cal (Calendar)                       │
-│  Cross-suite master data. DDD shared kernel.                 │
+│  T2 — Common (Cross-Suite Capabilities)                      │
+│  shared.{bp, cap}   — cross-suite master data (DDD kernel)   │
+│  auto.{ntf, wf}     — cross-suite automation fabric          │
 ├─────────────────────────────────────────────────────────────┤
 │  T3 — Core Business Suites                                   │
-│  FI, CRM, SD, PS, SRV, PPS, OPS, CO, COM, FAC, HR          │
+│  FI, CRM, SD, PS, SRV, PPS, OPS, CO, COM, FAC, HR, TKS      │
 │  Suite-specific bounded contexts. Domain events.             │
 ├─────────────────────────────────────────────────────────────┤
 │  T4 — Data, Analytics & Integration                          │
@@ -148,11 +152,11 @@ For the complete architecture with event flows and Mermaid diagrams, see [archit
 
 | Pattern | Convention | Example |
 |---------|-----------|---------|
-| REST API | `/api/<suite>/<domain>/v1` | `/api/fi/gl/v1/journals` |
-| Event exchange | `<suite>.<domain>.events` | `pps.pd.events` |
-| Routing key | `<suite>.<domain>.<aggregate>.<event>` | `pps.pd.product.released` |
-| DB schema | `<suite>_<domain>` | `pps_pd` |
-| Java package | `io.openleap.<suite>.<domain>` | `io.openleap.fi.gl` |
+| REST API | `/api/<suite>/<domain>/v1` | `/api/fi/gl/v1/journals`, `/api/auto/ntf/v1/notifications` |
+| Event exchange | `<suite>.<domain>.events` | `pps.pd.events`, `shared.bp.events` |
+| Routing key | `<suite>.<domain>.<aggregate>.<event>` | `pps.pd.product.released`, `auto.wf.workflow.triggered` |
+| DB schema | `<suite>_<domain>` | `pps_pd`, `shared_bp`, `auto_notification` |
+| Java package | `io.openleap.<suite>.<domain>` | `io.openleap.fi.gl`, `io.openleap.auto.ntf` |
 
 ---
 

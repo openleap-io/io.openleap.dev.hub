@@ -206,70 +206,35 @@
       "otherFiles": []
     },
     {
-      "suite": "T2",
+      "suite": "shared",
       "tier": "T2",
-      "path": "spec/T2_SharedBusiness",
+      "path": "T2_Common",
+      "_regenNote": "T2 split 2026-04-21: was 'T2' suite (single), now 'shared' + 'auto'. Feature IDs F-T2-* renamed to F-SHARED-BP-* / F-SHARED-CAP-*. Regenerate via crawl-implementation-status.py after dev.spec rename.",
       "suiteSpec": {
-        "file": "spec/T2_SharedBusiness/_t2_suite.md",
+        "file": "T2_Common/_shared_suite.md",
         "templateCompliance": 100
       },
       "domainSpecs": [
-        {"file": "spec/T2_SharedBusiness/domain-specs/t2_bp-spec.md", "templateCompliance": 90},
-        {"file": "spec/T2_SharedBusiness/domain-specs/t2_cap-spec.md", "templateCompliance": 92}
+        {"file": "T2_Common/domain-specs/shared_bp-spec.md", "templateCompliance": 90},
+        {"file": "T2_Common/domain-specs/shared_cap-spec.md", "templateCompliance": 92}
       ],
-      "featureCompositions": [
-        {"file": "spec/T2_SharedBusiness/features/compositions/F-T2-001.md", "templateCompliance": 95},
-        {"file": "spec/T2_SharedBusiness/features/compositions/F-T2-002.md", "templateCompliance": 95},
-        {"file": "spec/T2_SharedBusiness/features/compositions/F-T2-003.md", "templateCompliance": 95},
-        {"file": "spec/T2_SharedBusiness/features/compositions/F-T2-004.md", "templateCompliance": 95}
+      "uvlCatalog": {"file": "T2_Common/shared.catalog.uvl", "templateCompliance": null},
+      "otherFiles": []
+    },
+    {
+      "suite": "auto",
+      "tier": "T2",
+      "path": "T2_Common",
+      "_regenNote": "T2 split 2026-04-21: new suite 'auto' promoted from crm.ntf + crm.wf. 60-day routing-key bridge active.",
+      "suiteSpec": {
+        "file": "T2_Common/_auto_suite.md",
+        "templateCompliance": null
+      },
+      "domainSpecs": [
+        {"file": "T2_Common/domain-specs/auto_ntf-spec.md", "templateCompliance": 95},
+        {"file": "T2_Common/domain-specs/auto_wf-spec.md", "templateCompliance": 95}
       ],
-      "featureLeafSpecs": [
-        {"file": "spec/T2_SharedBusiness/features/leaves/F-T2-001-01/feature-spec.md", "templateCompliance": 95},
-        {"file": "spec/T2_SharedBusiness/features/leaves/F-T2-001-02/feature-spec.md", "templateCompliance": 95},
-        {"file": "spec/T2_SharedBusiness/features/leaves/F-T2-001-03/feature-spec.md", "templateCompliance": 95},
-        {"file": "spec/T2_SharedBusiness/features/leaves/F-T2-001-04/feature-spec.md", "templateCompliance": 95},
-        {"file": "spec/T2_SharedBusiness/features/leaves/F-T2-001-05/feature-spec.md", "templateCompliance": 95},
-        {"file": "spec/T2_SharedBusiness/features/leaves/F-T2-002-01/feature-spec.md", "templateCompliance": 95},
-        {"file": "spec/T2_SharedBusiness/features/leaves/F-T2-002-02/feature-spec.md", "templateCompliance": 95},
-        {"file": "spec/T2_SharedBusiness/features/leaves/F-T2-002-03/feature-spec.md", "templateCompliance": 95},
-        {"file": "spec/T2_SharedBusiness/features/leaves/F-T2-002-04/feature-spec.md", "templateCompliance": 95},
-        {"file": "spec/T2_SharedBusiness/features/leaves/F-T2-003-01/feature-spec.md", "templateCompliance": 95},
-        {"file": "spec/T2_SharedBusiness/features/leaves/F-T2-003-02/feature-spec.md", "templateCompliance": 95},
-        {"file": "spec/T2_SharedBusiness/features/leaves/F-T2-004-01/feature-spec.md", "templateCompliance": 95}
-      ],
-      "uvlCatalog": {"file": "spec/T2_SharedBusiness/t2.catalog.uvl", "templateCompliance": null},
-      "uvlFeatureFiles": [
-        {"file": "spec/T2_SharedBusiness/uvl/compositions/F-T2-001.uvl", "templateCompliance": null},
-        {"file": "spec/T2_SharedBusiness/uvl/compositions/F-T2-002.uvl", "templateCompliance": null},
-        {"file": "spec/T2_SharedBusiness/uvl/compositions/F-T2-003.uvl", "templateCompliance": null},
-        {"file": "spec/T2_SharedBusiness/uvl/compositions/F-T2-004.uvl", "templateCompliance": null},
-        {"file": "spec/T2_SharedBusiness/uvl/leaves/F-T2-001-01.uvl", "templateCompliance": null},
-        {"file": "spec/T2_SharedBusiness/uvl/leaves/F-T2-001-02.uvl", "templateCompliance": null},
-        {"file": "spec/T2_SharedBusiness/uvl/leaves/F-T2-001-03.uvl", "templateCompliance": null},
-        {"file": "spec/T2_SharedBusiness/uvl/leaves/F-T2-001-04.uvl", "templateCompliance": null},
-        {"file": "spec/T2_SharedBusiness/uvl/leaves/F-T2-001-05.uvl", "templateCompliance": null},
-        {"file": "spec/T2_SharedBusiness/uvl/leaves/F-T2-002-01.uvl", "templateCompliance": null},
-        {"file": "spec/T2_SharedBusiness/uvl/leaves/F-T2-002-02.uvl", "templateCompliance": null},
-        {"file": "spec/T2_SharedBusiness/uvl/leaves/F-T2-002-03.uvl", "templateCompliance": null},
-        {"file": "spec/T2_SharedBusiness/uvl/leaves/F-T2-002-04.uvl", "templateCompliance": null},
-        {"file": "spec/T2_SharedBusiness/uvl/leaves/F-T2-003-01.uvl", "templateCompliance": null},
-        {"file": "spec/T2_SharedBusiness/uvl/leaves/F-T2-003-02.uvl", "templateCompliance": null},
-        {"file": "spec/T2_SharedBusiness/uvl/leaves/F-T2-004-01.uvl", "templateCompliance": null}
-      ],
-      "auiContracts": [
-        {"file": "spec/T2_SharedBusiness/contracts/aui/F-T2-001-01.aui.yaml", "templateCompliance": null},
-        {"file": "spec/T2_SharedBusiness/contracts/aui/F-T2-001-02.aui.yaml", "templateCompliance": null},
-        {"file": "spec/T2_SharedBusiness/contracts/aui/F-T2-001-03.aui.yaml", "templateCompliance": null},
-        {"file": "spec/T2_SharedBusiness/contracts/aui/F-T2-001-04.aui.yaml", "templateCompliance": null},
-        {"file": "spec/T2_SharedBusiness/contracts/aui/F-T2-001-05.aui.yaml", "templateCompliance": null},
-        {"file": "spec/T2_SharedBusiness/contracts/aui/F-T2-002-01.aui.yaml", "templateCompliance": null},
-        {"file": "spec/T2_SharedBusiness/contracts/aui/F-T2-002-02.aui.yaml", "templateCompliance": null},
-        {"file": "spec/T2_SharedBusiness/contracts/aui/F-T2-002-03.aui.yaml", "templateCompliance": null},
-        {"file": "spec/T2_SharedBusiness/contracts/aui/F-T2-002-04.aui.yaml", "templateCompliance": null},
-        {"file": "spec/T2_SharedBusiness/contracts/aui/F-T2-003-01.aui.yaml", "templateCompliance": null},
-        {"file": "spec/T2_SharedBusiness/contracts/aui/F-T2-003-02.aui.yaml", "templateCompliance": null},
-        {"file": "spec/T2_SharedBusiness/contracts/aui/F-T2-004-01.aui.yaml", "templateCompliance": null}
-      ],
+      "uvlCatalog": {"file": "T2_Common/auto.catalog.uvl", "templateCompliance": null},
       "otherFiles": []
     },
     {

@@ -34,11 +34,18 @@ flowchart TD
     PARENT --> REF & CFG & I18N & JC
     STARTER --> REF & CFG & I18N & JC
 
-    subgraph T2[Shared Business — T2]
-        BP[shared.bp<br/>Business Partner]
+    subgraph T2[Common — T2]
+        subgraph T2SH[shared — master data]
+            BP[shared.bp<br/>Business Partner]
+            CAP[shared.cap<br/>Calendar & Planning<br/>planned]
+        end
+        subgraph T2AU[auto — automation fabric]
+            NTF[auto.ntf<br/>Notification Hub<br/>planned ← crm.ntf]
+            WF[auto.wf<br/>Workflow Engine<br/>planned ← crm.wf]
+        end
     end
 
-    PARENT --> BP
+    PARENT --> BP & CAP & NTF & WF
 
     subgraph T3[Domain Services — T3]
         FIGL[fi.gl<br/>General Ledger]

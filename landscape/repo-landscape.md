@@ -175,10 +175,10 @@ Which specs live where and what is canonical.
 | tech/email (T1) | `T1_Platform/tech/domain-specs/tech_email-spec.md` | `io.openleap.tech.email/` (planned) — supersedes `crm.email` |
 | tech/ai (T1) | `T1_Platform/tech/domain-specs/tech_ai-spec.md` | `io.openleap.tech.ai/` (planned, new) |
 | iam/* (T1) | `T1_Platform/iam/domain-specs/` | `io.openleap.iam.*/` (per service) |
-| bp (T2) | `T2_SharedBusiness/domain-specs/` | — |
-| cap (T2) | `T2_SharedBusiness/domain-specs/` | `io.openleap.shared.cap/` |
-| shared/ntf (T2) | `T2_SharedBusiness/domain-specs/shared_ntf-spec.md` | `io.openleap.shared.ntf/` (planned) — supersedes `crm.ntf` |
-| shared/wf (T2) | `T2_SharedBusiness/domain-specs/shared_wf-spec.md` | `io.openleap.shared.wf/` (planned) — supersedes `crm.wf` |
+| shared/bp (T2) | `T2_Common/domain-specs/shared_bp-spec.md` | `io.openleap.shared.bp/` |
+| shared/cap (T2) | `T2_Common/domain-specs/shared_cap-spec.md` | `io.openleap.shared.cap/` (planned) |
+| auto/ntf (T2) | `T2_Common/domain-specs/auto_ntf-spec.md` | `io.openleap.auto.ntf/` (planned) — supersedes `crm.ntf` |
+| auto/wf (T2) | `T2_Common/domain-specs/auto_wf-spec.md` | `io.openleap.auto.wf/` (planned) — supersedes `crm.wf` |
 | fi/* (T3) | `T3_Domains/FI/` | per service |
 | crm/* (T3) | `T3_Domains/CRM/` | `io.openleap.crm.*/` (see CRM suite header for DEPRECATED entries) |
 | tks/tkt (T3) | `T3_Domains/TKS/domain-specs/tks_tkt-spec.md` | `io.openleap.tks.tkt/` (planned) |
@@ -197,8 +197,8 @@ Which specs live where and what is canonical.
 **Rule:** `io.openleap.dev.spec/` is the canonical source for all domain specifications. Service repos may contain derived OpenAPI specs for development convenience, but the spec repo takes precedence on conflicts.
 
 **Deprecated (superseded — grace period 2026-Q3 → Q1-2027):**
-- `crm.ntf` → `shared.ntf`
-- `crm.wf` → `shared.wf`
+- `crm.ntf` → `auto.ntf` (T2 Common — was promoted to `shared.ntf` first, renamed to `auto.ntf` in the T2 suite split 2026-04-21)
+- `crm.wf` → `auto.wf` (T2 Common — idem)
 - `crm.search` → `tech.search`
 - `crm.email` → `tech.email`
 - `crm.sup` → `tks.tkt` + `tks.kb`
@@ -219,7 +219,7 @@ These active service repos have no corresponding specification in `io.openleap.s
 | `io.openleap.iam.authz` | `spec/T1_Platform/IAM/iam_authz.md` | High |
 | `io.openleap.iam.tenant` | `spec/T1_Platform/IAM/iam_tenant.md` | High |
 | `io.openleap.iam.audit` | `spec/T1_Platform/IAM/iam_audit.md` | High |
-| `io.openleap.common.nfs` | `spec/T1_Platform/nfs/` | Medium |
+| `io.openleap.common.nfs` | N/A — shared Java library, not a domain service | — |
 | `io.openleap.dps` | `spec/T1_Platform/dps/` | Low (stale) |
 
 ### Specs Without Repos

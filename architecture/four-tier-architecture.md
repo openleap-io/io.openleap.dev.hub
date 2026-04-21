@@ -13,9 +13,10 @@ OpenLeap adopts a pragmatic four-tier architecture to separate technical foundat
   - Purpose: Provide shared, low-level platform services and reference data needed across the enterprise. These services are highly stable, read-optimized, and accessed synchronously by higher tiers.
   - Characteristics: Small, focused services; strong backward compatibility; high availability; multi-tenant aware (where applicable).
 
-- Tier 2 — Shared Enterprise Business (T2)
-  - Purpose: House cross-cutting enterprise master data and shared business capabilities (e.g., Business Partner). Provides authoritative sources consumed across suites in Tier 3.
-  - Characteristics: Enterprise-governed domains; consistent identifiers; lifecycle events published for downstream consumers.
+- Tier 2 — Common (T2): cross-suite capabilities split into two suites
+  - **shared** — Cross-domain master data (Business Partner, Calendar & Planning). Authoritative sources consumed across suites in Tier 3; lifecycle events published for downstream consumers.
+  - **auto** — Cross-domain automation fabric (Notification Hub, Workflow Engine). Rule-based automation, multi-channel delivery, assignment & escalation; consumed by any T3 suite.
+  - Characteristics: Enterprise-governed, suite-agnostic, kernel services (shared kernel for `shared`; declarative automation engine for `auto`).
 
 - Tier 3 — Core Business Suites (T3)
   - Purpose: Deliver the operational core of the ERP. Organized into suites (e.g., PPS, FI, SD), each containing multiple business domains.
@@ -42,11 +43,19 @@ Below are representative (non-exhaustive) suites and domains used across OpenLea
 
 Access pattern: Primarily synchronous lookups from higher tiers (e.g., resolve codes, labels, units, templates). These services may also emit update events when reference data changes, but most consumers rely on on-demand reads.
 
-### 2.2 Tier 2 — Shared Enterprise Business (T2)
-- bp — Business Partner (parties, organizations, contacts)
-- cal — Calendar & Planner (working calendars, capacity calendars)
+### 2.2 Tier 2 — Common (T2)
 
-Access pattern: Authoritative master data with both synchronous APIs (for queries/CRUD as allowed) and asynchronous lifecycle events (e.g., `bp.party.created`).
+Two cross-suite suites:
+
+**shared** — master data
+- bp — Business Partner (parties, organizations, contacts, relationships)
+- cap — Calendar & Planning (calendars, working patterns, holidays, slots, bookings, periods)
+
+**auto** — automation fabric
+- ntf — Notification Hub (multi-channel delivery, per-principal preferences, templates, digest & quiet hours)
+- wf — Workflow Engine (triggers, conditions, actions, assignment & escalation rules, template library)
+
+Access pattern: Authoritative cross-suite services with both synchronous APIs and asynchronous events (e.g., `shared.bp.party.created`, `auto.wf.workflow.triggered`).
 
 ### 2.3 Tier 3 — Core Business Suites (T3)
 
@@ -164,10 +173,10 @@ To ensure interoperability and discoverability, OpenLeap follows consistent nami
   - Examples: `/api/pps/pd/v1`, `/api/fi/ap/v1`, `/api/t1/ref/v1`
 
 - Event exchanges (RabbitMQ topic exchanges): `<suite>.<domain>.events`
-  - Examples: `pps.pd.events`, `fi.ap.events`, `shared.bp.events`, `i18n.i18n.events`
+  - Examples: `pps.pd.events`, `fi.ap.events`, `shared.bp.events`, `auto.ntf.events`, `i18n.i18n.events`
 
 - Routing keys: `<suite>.<domain>.<aggregate>.<event>`
-  - Examples: `pps.pd.product.released`, `pps.im.goodsreceipt.posted`, `sd.sd.billing.created`, `fi.ap.invoice.posted`, `bp.bp.party.created`
+  - Examples: `pps.pd.product.released`, `pps.im.goodsreceipt.posted`, `sd.sd.billing.created`, `fi.ap.invoice.posted`, `shared.bp.party.created`, `auto.wf.workflow.triggered`, `auto.ntf.notification.delivered`
 
 
 ## 4. Communication Patterns
@@ -211,7 +220,9 @@ OpenLeap combines synchronous communication for data access with asynchronous me
   - `sd.sd.delivery.created` → consumed by `pps.im` for goods issue.
   - `sd.sd.billing.created` → consumed by `fi.ar` (financial posting).
   - `fi.ap.invoice.posted` → consumed by `pps.pur` (3-way match lifecycle).
-  - `bp.bp.party.created` → consumed by `pps.pur`, `sd.sd`, `hr.hr`, `fi.ap`.
+  - `shared.bp.party.created` → consumed by `pps.pur`, `sd.sd`, `hr.hr`, `fi.ap`.
+  - `auto.wf.workflow.triggered` → cross-suite workflow execution; actions may call REST APIs of any domain.
+  - `auto.ntf.notification.delivered` → audit trail of cross-suite user notifications.
   - Tier 4 `bi` consumes events from all suites for analytics.
 
 
@@ -238,9 +249,9 @@ OpenLeap combines synchronous communication for data access with asynchronous me
 
 ## 8. References
 - System overview diagram: `spec/SYSTEM_OVERVIEW.md` (Mermaid flowchart with tiers, suites, domains, and dependencies)
-- Tier specs: `spec/T1_Platform`, `spec/T2_SharedBusiness`, `spec/T3_Domains`, `spec/T4_Data`
-- Specification templates: `concepts/templates/platform/`
-- Open tasks: `todo/`
+- Tier specs: `io.openleap.dev.spec` → `T1_Platform`, `T2_Common`, `T3_Domains`, `T4_Data`
+- Specification templates: `io.openleap.dev.concepts` → `templates/platform/`
+- Repo & status landscape: `io.openleap.dev.hub` → `landscape/`
 
 
 ## 9. System Overview (inlined)
@@ -275,10 +286,18 @@ flowchart TB
   end
 
   %% ===================== TIER 2 =====================
-  subgraph T2[Tier 2 - Shared Enterprise Business]
+  subgraph T2[Tier 2 - Common]
     direction TB
-    BP[bp / Business Partner<br/>Exchange: shared.bp.events]
-    CAL[cal / Calender and Planner<br/>Exchange: shared.cal.events]
+    subgraph T2_SHARED[shared - master data]
+      direction TB
+      BP[bp / Business Partner<br/>Exchange: shared.bp.events]
+      CAP[cap / Calendar & Planning<br/>Exchange: shared.cap.events]
+    end
+    subgraph T2_AUTO[auto - automation fabric]
+      direction TB
+      NTF[ntf / Notification Hub<br/>Exchange: auto.ntf.events]
+      WF[wf / Workflow Engine<br/>Exchange: auto.wf.events]
+    end
   end
 
   %% ===================== TIER 3 =====================
@@ -445,10 +464,16 @@ flowchart TB
   MES -->|pps.mes.confirmation.posted| IM
 
   %% BP master data to other domains
-  BP -->|bp.bp.party.created| PUR
-  BP -->|bp.bp.party.created| SDCORE
-  BP -->|bp.bp.party.created| HRCORE
-  BP -->|bp.bp.party.created| AP
+  BP -->|shared.bp.party.created| PUR
+  BP -->|shared.bp.party.created| SDCORE
+  BP -->|shared.bp.party.created| HRCORE
+  BP -->|shared.bp.party.created| AP
+
+  %% Auto fabric - cross-suite notification & workflow (illustrative edges)
+  SDCORE -.->|events trigger| WF
+  AP -.->|events trigger| WF
+  WF -->|auto.wf.workflow.triggered| NTF
+  NTF -->|auto.ntf.notification.delivered| BI
 
   %% IM/WM may signal stock/warehouse events to MES/SD (illustrative)
   IM -->|pps.im.stock.changed| MES
@@ -469,5 +494,6 @@ Notes
 - CO (Controlling) can live in FI or PPS depending on governance. Keep its own prefix and exchange: `fi.co.events` or `pps.co.events`. CO is also modeled as a standalone suite (`co.*`) for deployments that prefer suite-level separation.
 - Tier‑1 services are primarily used via synchronous reads (dashed arrows). They may emit update events (not elaborated here).
 - IAM (Identity & Access Management) is a cross-cutting T1 dependency: all services depend on IAM for authentication and authorization. To keep the diagram readable, IAM auth arrows are not drawn individually.
-- Event arrows are illustrative and focus on key flows already present in contracts (e.g., `pps.pd.product.released`, `pps.pur.purchaseorder.created`, `pps.im.goodsreceipt.posted`, `sd.sd.billing.created`, `fi.ap.invoice.posted`, `bp.bp.party.created`).
-- New T3 suites (CO, COM, CRM, FAC, OPS, SRV) show 3-4 representative domains each; full domain lists are in `spec/OPENLEAP_PLATFORM_GENERAL.md`.
+- Event arrows are illustrative and focus on key flows already present in contracts (e.g., `pps.pd.product.released`, `pps.pur.purchaseorder.created`, `pps.im.goodsreceipt.posted`, `sd.sd.billing.created`, `fi.ap.invoice.posted`, `shared.bp.party.created`, `auto.wf.workflow.triggered`, `auto.ntf.notification.delivered`).
+- New T3 suites (CO, COM, CRM, FAC, OPS, SRV, TKS) show 3-4 representative domains each; full domain lists are in `dev.spec/T3_Domains/` (each suite has a `_*_suite.md` index).
+- T2 Common suite `auto` (ntf + wf) was promoted from legacy CRM domains `crm.ntf` / `crm.wf` in April 2026; a 60-day routing-key bridge re-emits `crm.ntf.*` and `crm.wf.*` alongside the new `auto.*` keys.

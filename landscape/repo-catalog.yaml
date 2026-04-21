@@ -160,7 +160,10 @@
   last_activity: 2025-11-28
 
 # ═══════════════════════════════════════════════════════════════════
-# BACKEND — SHARED BUSINESS SERVICES (T2)
+# BACKEND — T2 COMMON (cross-suite capabilities)
+# Two T2 suites:
+#   - shared: cross-domain master data (bp, cap)
+#   - auto:   cross-domain automation fabric (ntf, wf)
 # ═══════════════════════════════════════════════════════════════════
 
 - id: io.openleap.shared.bp
@@ -171,6 +174,8 @@
   depends_on: [io.openleap.parent]
   status: active
   last_activity: 2026-03-16
+  suite: shared
+  tier: T2
   api_path: /api/shared/bp/v1
 
 - id: io.openleap.shared.bp.old
@@ -182,6 +187,42 @@
   status: archived
   last_activity: 2026-02-21
   notes: Superseded by io.openleap.shared.bp
+
+- id: io.openleap.shared.cap
+  category: backend-service
+  description: Calendar & Planning — calendars, working patterns, holidays, slots, bookings, periods
+  tech: [java-25, spring-boot-4, postgresql, rabbitmq]
+  build: maven
+  depends_on: [io.openleap.parent]
+  status: planned
+  suite: shared
+  tier: T2
+  api_path: /api/shared/cap/v1
+  notes: Spec in dev.spec/T2_Common/domain-specs/shared_cap-spec.md; repo not yet created
+
+- id: io.openleap.auto.ntf
+  category: backend-service
+  description: Notification Hub — multi-channel delivery, preferences, templates, digest & quiet hours
+  tech: [java-25, spring-boot-4, postgresql, rabbitmq]
+  build: maven
+  depends_on: [io.openleap.parent]
+  status: planned
+  suite: auto
+  tier: T2
+  api_path: /api/auto/ntf/v1
+  notes: Supersedes io.openleap.crm.ntf. 60-day routing-key bridge re-emits crm.ntf.* after promotion. See dev.spec/T2_Common/domain-specs/auto_ntf-spec.md.
+
+- id: io.openleap.auto.wf
+  category: backend-service
+  description: Workflow Engine — triggers, conditions, actions, assignment & escalation rules, template library
+  tech: [java-25, spring-boot-4, postgresql, rabbitmq]
+  build: maven
+  depends_on: [io.openleap.parent]
+  status: planned
+  suite: auto
+  tier: T2
+  api_path: /api/auto/wf/v1
+  notes: Supersedes io.openleap.crm.wf. 60-day routing-key bridge re-emits crm.wf.* after promotion. See dev.spec/T2_Common/domain-specs/auto_wf-spec.md.
 
 # ═══════════════════════════════════════════════════════════════════
 # BACKEND — DOMAIN SERVICES (T3)

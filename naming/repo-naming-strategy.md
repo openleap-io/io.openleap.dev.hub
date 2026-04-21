@@ -34,11 +34,12 @@ Domain services use short abbreviations as their category infix. These are alrea
 | `sd` | Sales & Distribution | sd.ord, sd.bil, sd.shp |
 | `srv` | Service Delivery | srv.cas, srv.apt, srv.cat |
 | `pur` | Purchasing | pur.sup |
-| `shared` | Cross-domain shared | shared.bp, shared.cap, shared.ntf, shared.wf |
-| `common` | Common utilities | common.data, common.nfs |
-| `t1` | Platform/Tech services | t1.cfg, t1.i18n, t1.jc, t1.ref |
-| `tech` | Technical services | tech.dms, tech.zugferd, tech.search, tech.email, tech.ai |
+| `shared` | T2 suite — cross-domain master data | shared.bp, shared.cap |
+| `auto` | T2 suite — cross-domain automation fabric | auto.ntf, auto.wf *(promoted from crm.ntf, crm.wf)* |
+| `t1` | T1 — Platform params/ref services | t1.cfg, t1.i18n, t1.jc, t1.ref |
+| `tech` | T1 — Technical services | tech.dms, tech.zugferd, tech.search, tech.email, tech.ai |
 | `event` | Event/CDC | event.cdc |
+| `common` | Shared Java libraries *(not a domain suite)* | common.data, common.nfs |
 
 ### Infrastructure Categories
 
@@ -168,10 +169,10 @@ The entry point for anyone joining or navigating OpenLeap. Answers "what is this
 The formal, authoritative specifications for all platform services and business domains. Pure spec content, no tooling.
 
 **Contains (from `spec/`):**
-- `T1_PLATFORM/` — IAM, PARAM, TECH service specs (255 files)
-- `T2_SHARED_BUSINESS/` — BP, Calendar shared specs (64 files)
-- `T3_DOMAINS/` — CRM, FI, SD, PS, SRV, CO, PPS, OPS, COM, FAC, HR (1,093 files)
-- `T4_DATA/` — BI/Data specs (1 file)
+- `T1_Platform/` — IAM, PARAM, TECH service specs (255 files)
+- `T2_Common/` — two T2 suites: `shared` (bp, cap — master data) and `auto` (ntf, wf — automation fabric)
+- `T3_Domains/` — CRM, FI, SD, PS, SRV, CO, PPS, OPS, COM, FAC, HR, TKS
+- `T4_Data/` — BI/Data specs
 
 ### `io.openleap.dev.concepts` — Specification Framework (NEW)
 

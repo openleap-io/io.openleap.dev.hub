@@ -67,15 +67,15 @@ Governs deployment topology and dependency direction. Higher tiers may depend on
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │  T1 — Platform & Technical Foundations                       │
-│  IAM, ref, i18n, si, dms, rpt                               │
+│  IAM, ref, i18n, si, dms, rpt, search, email, ai            │
 │  Suite-agnostic. Sync lookups. Invisible to business users.  │
 ├─────────────────────────────────────────────────────────────┤
-│  T2 — Shared Enterprise Business                             │
-│  bp (Business Partner), cal (Calendar)                       │
-│  Cross-suite master data. DDD shared kernel.                 │
+│  T2 — Common (Cross-Suite Capabilities)                      │
+│  shared.{bp, cap}  — master data (DDD shared kernel)         │
+│  auto.{ntf, wf}    — automation fabric (multi-suite)         │
 ├─────────────────────────────────────────────────────────────┤
 │  T3 — Core Business Suites                                   │
-│  PPS (10 domains), FI (6), SD (3), HR (2), PS (1)           │
+│  PPS, FI, SD, HR, PS, CO, COM, CRM, FAC, OPS, SRV, TKS      │
 │  Suite-specific bounded contexts. Domain events.             │
 │  Feature mutations stay within ONE suite.                    │
 ├─────────────────────────────────────────────────────────────┤
@@ -175,7 +175,7 @@ Used for data lookups and transactional commands.
 |-----------|---------|---------|
 | Base path | `/api/<suite>/<domain>/v1` | `/api/pps/pd/v1` |
 | Commands | `POST` returning `202 Accepted` | `POST /api/fi/gl/v1/journals` |
-| Queries | `GET` with pagination | `GET /api/shared/bp/v1/parties?page=0&size=50` |
+| Queries | `GET` with pagination | `GET /api/shared/bp/v1/parties?page=0&size=50`, `GET /api/auto/wf/v1/workflows` |
 | Concurrency | ETag + `If-Match` | Optimistic locking on aggregate version |
 | T1 lookups | Sync REST from any tier | REF for codes, SI for units, DMS for documents |
 
@@ -195,14 +195,16 @@ Used for domain change notifications. Decouples services and enables eventual co
 ### 6.3 Key Event Flows
 
 ```
-pps.pd.product.released  → pps.mrp, pps.pur, pps.mes, pps.qm, pps.im
-pps.pur.po.created       → pps.im (goods receipt expectation)
+pps.pd.product.released   → pps.mrp, pps.pur, pps.mes, pps.qm, pps.im
+pps.pur.po.created        → pps.im (goods receipt expectation)
 pps.im.goodsreceipt.posted → pps.pur (3-way match), pps.qm (quality check)
-sd.sd.delivery.created   → pps.im (goods issue)
-sd.sd.billing.created    → fi.ar (financial posting)
-fi.ap.invoice.posted     → pps.pur (invoice matching)
-bp.bp.party.created      → pps.pur, sd.sd, hr.hr, fi.ap (master data sync)
-all domain events        → T4 bi (analytics ingestion)
+sd.sd.delivery.created    → pps.im (goods issue)
+sd.sd.billing.created     → fi.ar (financial posting)
+fi.ap.invoice.posted      → pps.pur (invoice matching)
+shared.bp.party.created   → pps.pur, sd.sd, hr.hr, fi.ap (master data sync)
+auto.wf.workflow.triggered → any T3 domain (rule-based action dispatch)
+auto.ntf.notification.delivered → audit/analytics
+all domain events         → T4 bi (analytics ingestion)
 ```
 
 ---

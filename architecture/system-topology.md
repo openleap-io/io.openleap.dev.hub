@@ -30,10 +30,18 @@ flowchart TB
   end
 
   %% ===================== TIER 2 =====================
-  subgraph T2[Tier 2 - Shared Enterprise Business]
+  subgraph T2[Tier 2 - Common]
     direction TB
-    BP[bp / Business Partner<br/>Exchange: shared.bp.events]
-    CAL[cal / Calender and Planner<br/>Exchange: shared.cal.events]
+    subgraph T2_SHARED[shared - master data]
+      direction TB
+      BP[bp / Business Partner<br/>Exchange: shared.bp.events]
+      CAP[cap / Calendar & Planning<br/>Exchange: shared.cap.events]
+    end
+    subgraph T2_AUTO[auto - automation fabric]
+      direction TB
+      NTF[ntf / Notification Hub<br/>Exchange: auto.ntf.events]
+      WF[wf / Workflow Engine<br/>Exchange: auto.wf.events]
+    end
   end
 
   %% ===================== TIER 3 =====================
@@ -200,10 +208,16 @@ flowchart TB
   MES -->|pps.mes.confirmation.posted| IM
 
   %% BP master data to other domains
-  BP -->|bp.bp.party.created| PUR
-  BP -->|bp.bp.party.created| SDCORE
-  BP -->|bp.bp.party.created| HRCORE
-  BP -->|bp.bp.party.created| AP
+  BP -->|shared.bp.party.created| PUR
+  BP -->|shared.bp.party.created| SDCORE
+  BP -->|shared.bp.party.created| HRCORE
+  BP -->|shared.bp.party.created| AP
+
+  %% Auto fabric - cross-suite notification & workflow (illustrative edges)
+  SDCORE -.->|events trigger| WF
+  AP -.->|events trigger| WF
+  WF -->|auto.wf.workflow.triggered| NTF
+  NTF -->|auto.ntf.notification.delivered| BI
 
   %% IM/WM may signal stock/warehouse events to MES/SD (illustrative)
   IM -->|pps.im.stock.changed| MES
@@ -224,5 +238,6 @@ Notes
 - CO (Controlling) can live in FI or PPS depending on governance. Keep its own prefix and exchange: `fi.co.events` or `pps.co.events`. CO is also modeled as a standalone suite (`co.*`) for deployments that prefer suite-level separation.
 - Tier‑1 services are primarily used via synchronous reads (dashed arrows). They may emit update events (not elaborated here).
 - IAM (Identity & Access Management) is a cross-cutting T1 dependency: all services depend on IAM for authentication and authorization. To keep the diagram readable, IAM auth arrows are not drawn individually.
-- Event arrows are illustrative and focus on key flows already present in contracts (e.g., `pps.pd.product.released`, `pps.pur.purchaseorder.created`, `pps.im.goodsreceipt.posted`, `sd.sd.billing.created`, `fi.ap.invoice.posted`, `bp.bp.party.created`).
-- New T3 suites (CO, COM, CRM, FAC, OPS, SRV) show 3-4 representative domains each; full domain lists are in `spec/OPENLEAP_PLATFORM_GENERAL.md`.
+- Event arrows are illustrative and focus on key flows already present in contracts (e.g., `pps.pd.product.released`, `pps.pur.purchaseorder.created`, `pps.im.goodsreceipt.posted`, `sd.sd.billing.created`, `fi.ap.invoice.posted`, `shared.bp.party.created`, `auto.wf.workflow.triggered`, `auto.ntf.notification.delivered`).
+- New T3 suites (CO, COM, CRM, FAC, OPS, SRV, TKS) show 3-4 representative domains each; full domain lists are in `dev.spec/T3_Domains/{SUITE}/_*_suite.md`.
+- T2 Common suite `auto` (ntf + wf) was promoted from legacy CRM domains `crm.ntf` / `crm.wf` in April 2026; a 60-day routing-key bridge re-emits `crm.ntf.*` and `crm.wf.*` alongside the new `auto.*` keys.
