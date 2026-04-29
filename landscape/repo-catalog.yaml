@@ -206,11 +206,12 @@
   tech: [java-25, spring-boot-4, postgresql, rabbitmq]
   build: maven
   depends_on: [io.openleap.parent]
-  status: planned
+  status: active
   suite: auto
   tier: T2
   api_path: /api/auto/ntf/v1
-  notes: Supersedes io.openleap.crm.ntf. 60-day routing-key bridge re-emits crm.ntf.* after promotion. See dev.spec/T2_Common/domain-specs/auto_ntf-spec.md.
+  previous_names: [io.openleap.shared.ntf, io.openleap.crm.ntf]
+  notes: Promoted from io.openleap.crm.ntf -> io.openleap.shared.ntf -> io.openleap.auto.ntf (T2 split 2026-04-21, suite rename 2026-04-29). Spec in dev.spec/T2_Common/domain-specs/auto_ntf-spec.md.
 
 - id: io.openleap.auto.wf
   category: backend-service
@@ -218,11 +219,12 @@
   tech: [java-25, spring-boot-4, postgresql, rabbitmq]
   build: maven
   depends_on: [io.openleap.parent]
-  status: planned
+  status: active
   suite: auto
   tier: T2
   api_path: /api/auto/wf/v1
-  notes: Supersedes io.openleap.crm.wf. 60-day routing-key bridge re-emits crm.wf.* after promotion. See dev.spec/T2_Common/domain-specs/auto_wf-spec.md.
+  previous_names: [io.openleap.shared.wf, io.openleap.crm.wf]
+  notes: Promoted from io.openleap.crm.wf -> io.openleap.shared.wf -> io.openleap.auto.wf (T2 split 2026-04-21, suite rename 2026-04-29). Spec in dev.spec/T2_Common/domain-specs/auto_wf-spec.md.
 
 # ═══════════════════════════════════════════════════════════════════
 # BACKEND — DOMAIN SERVICES (T3)

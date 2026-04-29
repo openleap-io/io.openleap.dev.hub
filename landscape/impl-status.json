@@ -1,7 +1,101 @@
 {
-  "lastCrawled": "2026-04-14",
-  "lastUpdated": "2026-04-14",
+  "lastCrawled": "2026-04-29",
+  "lastUpdated": "2026-04-29",
   "services": [
+    {
+      "repository": "io.openleap.auto.ntf",
+      "repositoryUrl": "https://github.com/openleap-io/io.openleap.auto.ntf",
+      "implementationStatus": "active",
+      "hasSpecFolder": true,
+      "implSpecVersion": "2026-04-18",
+      "hasQaFolder": true,
+      "qaFolderNotes": null,
+      "notes": "",
+      "lastAnalysisCommitHash": "6ffe092",
+      "lastAnalysisAt": "2026-04-29",
+      "adrComplianceScore": null,
+      "adrReviewGuidelinesVersion": null,
+      "adrReviewCommitHash": null,
+      "parentVersion": "3.0.7",
+      "starterVersion": "4.0.0",
+      "coreDependencies": [
+        [
+          "core-common",
+          "4.0.0"
+        ],
+        [
+          "core-persistence",
+          "4.0.0"
+        ],
+        [
+          "core-messaging",
+          "4.0.0"
+        ],
+        [
+          "core-idempotency",
+          "4.0.0"
+        ],
+        [
+          "core-security",
+          "4.0.0"
+        ],
+        [
+          "core-web",
+          "4.0.0"
+        ],
+        [
+          "core-telemetry",
+          "4.0.0"
+        ]
+      ]
+    },
+    {
+      "repository": "io.openleap.auto.wf",
+      "repositoryUrl": "https://github.com/openleap-io/io.openleap.auto.wf",
+      "implementationStatus": "active",
+      "hasSpecFolder": true,
+      "implSpecVersion": "2026-04-18",
+      "hasQaFolder": true,
+      "qaFolderNotes": null,
+      "notes": "",
+      "lastAnalysisCommitHash": "fabddd2",
+      "lastAnalysisAt": "2026-04-29",
+      "adrComplianceScore": null,
+      "adrReviewGuidelinesVersion": null,
+      "adrReviewCommitHash": null,
+      "parentVersion": "3.0.7",
+      "starterVersion": "4.0.0",
+      "coreDependencies": [
+        [
+          "core-common",
+          "4.0.0"
+        ],
+        [
+          "core-persistence",
+          "4.0.0"
+        ],
+        [
+          "core-messaging",
+          "4.0.0"
+        ],
+        [
+          "core-idempotency",
+          "4.0.0"
+        ],
+        [
+          "core-security",
+          "4.0.0"
+        ],
+        [
+          "core-web",
+          "4.0.0"
+        ],
+        [
+          "core-telemetry",
+          "4.0.0"
+        ]
+      ]
+    },
     {
       "repository": "io.openleap.crm.act",
       "repositoryUrl": "https://github.com/openleap-io/io.openleap.crm.act",
@@ -723,41 +817,41 @@
       "hasQaFolder": true,
       "qaFolderNotes": null,
       "notes": "DEPRECATED — promoted to T2 Common suite 'auto' as io.openleap.auto.wf. Routing-key bridge crm.wf.* re-emitted for 60 days after promotion. Migrate callers by 2026-06-21.",
-      "lastAnalysisCommitHash": "9f61be7",
-      "lastAnalysisAt": "2026-04-14",
+      "lastAnalysisCommitHash": "156f8d4",
+      "lastAnalysisAt": "2026-04-29",
       "adrComplianceScore": null,
       "adrReviewGuidelinesVersion": null,
       "adrReviewCommitHash": null,
-      "parentVersion": "3.0.3-SNAPSHOT",
-      "starterVersion": "4.1.0-SNAPSHOT",
+      "parentVersion": "3.0.7",
+      "starterVersion": "4.0.0",
       "coreDependencies": [
         [
           "core-common",
-          "4.1.0-SNAPSHOT"
+          "4.0.0"
         ],
         [
           "core-persistence",
-          "4.1.0-SNAPSHOT"
+          "4.0.0"
         ],
         [
           "core-messaging",
-          "4.1.0-SNAPSHOT"
+          "4.0.0"
         ],
         [
           "core-idempotency",
-          "4.1.0-SNAPSHOT"
+          "4.0.0"
         ],
         [
           "core-security",
-          "4.1.0-SNAPSHOT"
+          "4.0.0"
         ],
         [
           "core-web",
-          "4.1.0-SNAPSHOT"
+          "4.0.0"
         ],
         [
           "core-telemetry",
-          "4.1.0-SNAPSHOT"
+          "4.0.0"
         ]
       ]
     },
@@ -877,8 +971,8 @@
       "hasQaFolder": true,
       "qaFolderNotes": null,
       "notes": "",
-      "lastAnalysisCommitHash": "b41e2d7",
-      "lastAnalysisAt": "2026-04-14",
+      "lastAnalysisCommitHash": "20d7a30",
+      "lastAnalysisAt": "2026-04-29",
       "adrComplianceScore": null,
       "adrReviewGuidelinesVersion": null,
       "adrReviewCommitHash": null,
@@ -895,13 +989,13 @@
       "hasQaFolder": false,
       "qaFolderNotes": "Checked 2026-04-14 via GitHub API - no /qa folder found.",
       "notes": "",
-      "lastAnalysisCommitHash": "2f11986",
-      "lastAnalysisAt": "2026-04-14",
+      "lastAnalysisCommitHash": "22abdef",
+      "lastAnalysisAt": "2026-04-29",
       "adrComplianceScore": null,
       "adrReviewGuidelinesVersion": null,
       "adrReviewCommitHash": null,
-      "parentVersion": null,
-      "starterVersion": null,
+      "parentVersion": "4.1.0",
+      "starterVersion": "4.1.0",
       "coreDependencies": []
     },
     {
@@ -949,14 +1043,43 @@
       "hasQaFolder": true,
       "qaFolderNotes": null,
       "notes": "",
-      "lastAnalysisCommitHash": "b721624",
-      "lastAnalysisAt": "2026-04-14",
+      "lastAnalysisCommitHash": "93986b6",
+      "lastAnalysisAt": "2026-04-29",
       "adrComplianceScore": null,
       "adrReviewGuidelinesVersion": null,
       "adrReviewCommitHash": null,
-      "parentVersion": "3.0.3-SNAPSHOT",
-      "starterVersion": "3.0.3-SNAPSHOT",
-      "coreDependencies": []
+      "parentVersion": "3.0.7",
+      "starterVersion": "4.0.0",
+      "coreDependencies": [
+        [
+          "core-common",
+          "4.0.0"
+        ],
+        [
+          "core-persistence",
+          "4.0.0"
+        ],
+        [
+          "core-messaging",
+          "4.0.0"
+        ],
+        [
+          "core-web",
+          "4.0.0"
+        ],
+        [
+          "core-security",
+          "4.0.0"
+        ],
+        [
+          "core-idempotency",
+          "4.0.0"
+        ],
+        [
+          "core-telemetry",
+          "4.0.0"
+        ]
+      ]
     },
     {
       "repository": "io.openleap.iam.authz",
@@ -967,14 +1090,43 @@
       "hasQaFolder": false,
       "qaFolderNotes": "Checked 2026-04-14 via GitHub API - no /qa folder found.",
       "notes": "",
-      "lastAnalysisCommitHash": "1463462",
-      "lastAnalysisAt": "2026-04-14",
+      "lastAnalysisCommitHash": "1cf3d8b",
+      "lastAnalysisAt": "2026-04-29",
       "adrComplianceScore": null,
       "adrReviewGuidelinesVersion": null,
       "adrReviewCommitHash": null,
-      "parentVersion": "3.0.3-SNAPSHOT",
-      "starterVersion": "3.0.3-SNAPSHOT",
-      "coreDependencies": []
+      "parentVersion": "3.0.7",
+      "starterVersion": "4.0.0",
+      "coreDependencies": [
+        [
+          "core-common",
+          "4.0.0"
+        ],
+        [
+          "core-persistence",
+          "4.0.0"
+        ],
+        [
+          "core-messaging",
+          "4.0.0"
+        ],
+        [
+          "core-web",
+          "4.0.0"
+        ],
+        [
+          "core-security",
+          "4.0.0"
+        ],
+        [
+          "core-idempotency",
+          "4.0.0"
+        ],
+        [
+          "core-telemetry",
+          "4.0.0"
+        ]
+      ]
     },
     {
       "repository": "io.openleap.iam.principal",
@@ -985,14 +1137,43 @@
       "hasQaFolder": true,
       "qaFolderNotes": null,
       "notes": "",
-      "lastAnalysisCommitHash": "c8f30b2",
-      "lastAnalysisAt": "2026-04-14",
+      "lastAnalysisCommitHash": "3d13a55",
+      "lastAnalysisAt": "2026-04-29",
       "adrComplianceScore": null,
       "adrReviewGuidelinesVersion": null,
       "adrReviewCommitHash": null,
-      "parentVersion": "3.0.0-SNAPSHOT",
-      "starterVersion": "3.0.3-SNAPSHOT",
-      "coreDependencies": []
+      "parentVersion": "3.0.7",
+      "starterVersion": "4.0.0",
+      "coreDependencies": [
+        [
+          "core-common",
+          "4.0.0"
+        ],
+        [
+          "core-persistence",
+          "4.0.0"
+        ],
+        [
+          "core-messaging",
+          "4.0.0"
+        ],
+        [
+          "core-web",
+          "4.0.0"
+        ],
+        [
+          "core-security",
+          "4.0.0"
+        ],
+        [
+          "core-idempotency",
+          "4.0.0"
+        ],
+        [
+          "core-telemetry",
+          "4.0.0"
+        ]
+      ]
     },
     {
       "repository": "io.openleap.iam.tenant",
@@ -1003,13 +1184,180 @@
       "hasQaFolder": true,
       "qaFolderNotes": null,
       "notes": "",
-      "lastAnalysisCommitHash": "7590f92",
-      "lastAnalysisAt": "2026-04-14",
+      "lastAnalysisCommitHash": "4360293",
+      "lastAnalysisAt": "2026-04-29",
       "adrComplianceScore": null,
       "adrReviewGuidelinesVersion": null,
       "adrReviewCommitHash": null,
-      "parentVersion": "3.0.3-SNAPSHOT",
-      "starterVersion": "3.0.3-SNAPSHOT",
+      "parentVersion": "3.0.7",
+      "starterVersion": "4.0.0",
+      "coreDependencies": [
+        [
+          "core-common",
+          "4.0.0"
+        ],
+        [
+          "core-persistence",
+          "4.0.0"
+        ],
+        [
+          "core-messaging",
+          "4.0.0"
+        ],
+        [
+          "core-web",
+          "4.0.0"
+        ],
+        [
+          "core-security",
+          "4.0.0"
+        ],
+        [
+          "core-idempotency",
+          "4.0.0"
+        ],
+        [
+          "core-telemetry",
+          "4.0.0"
+        ]
+      ]
+    },
+    {
+      "repository": "io.openleap.param.cfg",
+      "repositoryUrl": "https://github.com/openleap-io/io.openleap.param.cfg",
+      "implementationStatus": "active",
+      "hasSpecFolder": true,
+      "implSpecVersion": "2026-03-31",
+      "hasQaFolder": true,
+      "qaFolderNotes": null,
+      "notes": "",
+      "lastAnalysisCommitHash": "a96ffcc",
+      "lastAnalysisAt": "2026-04-29",
+      "adrComplianceScore": null,
+      "adrReviewGuidelinesVersion": null,
+      "adrReviewCommitHash": null,
+      "parentVersion": null,
+      "starterVersion": null,
+      "coreDependencies": []
+    },
+    {
+      "repository": "io.openleap.param.i18n",
+      "repositoryUrl": "https://github.com/openleap-io/io.openleap.param.i18n",
+      "implementationStatus": "active",
+      "hasSpecFolder": true,
+      "implSpecVersion": "2026-03-31",
+      "hasQaFolder": true,
+      "qaFolderNotes": null,
+      "notes": "",
+      "lastAnalysisCommitHash": "14bf67e",
+      "lastAnalysisAt": "2026-04-29",
+      "adrComplianceScore": null,
+      "adrReviewGuidelinesVersion": null,
+      "adrReviewCommitHash": null,
+      "parentVersion": null,
+      "starterVersion": "4.0.0",
+      "coreDependencies": [
+        [
+          "core-common",
+          "4.0.0-SNAPSHOT"
+        ],
+        [
+          "core-web",
+          "4.0.0-SNAPSHOT"
+        ],
+        [
+          "core-security",
+          "4.0.0-SNAPSHOT"
+        ],
+        [
+          "core-persistence",
+          "4.0.0-SNAPSHOT"
+        ],
+        [
+          "core-messaging",
+          "4.0.0-SNAPSHOT"
+        ],
+        [
+          "core-idempotency",
+          "4.0.0-SNAPSHOT"
+        ],
+        [
+          "core-telemetry",
+          "4.0.0-SNAPSHOT"
+        ],
+        [
+          "core-lock",
+          "4.0.0-SNAPSHOT"
+        ],
+        [
+          "core-iam",
+          "4.0.0-SNAPSHOT"
+        ]
+      ]
+    },
+    {
+      "repository": "io.openleap.param.ref",
+      "repositoryUrl": "https://github.com/openleap-io/io.openleap.param.ref",
+      "implementationStatus": "active",
+      "hasSpecFolder": true,
+      "implSpecVersion": "2026-03-31",
+      "hasQaFolder": true,
+      "qaFolderNotes": null,
+      "notes": "",
+      "lastAnalysisCommitHash": "5e21865",
+      "lastAnalysisAt": "2026-04-29",
+      "adrComplianceScore": null,
+      "adrReviewGuidelinesVersion": null,
+      "adrReviewCommitHash": null,
+      "parentVersion": "3.0.7",
+      "starterVersion": "4.0.0-SNAPSHOT",
+      "coreDependencies": [
+        [
+          "core-common",
+          "4.0.0-SNAPSHOT"
+        ],
+        [
+          "core-web",
+          "4.0.0-SNAPSHOT"
+        ],
+        [
+          "core-persistence",
+          "4.0.0-SNAPSHOT"
+        ],
+        [
+          "core-security",
+          "4.0.0-SNAPSHOT"
+        ],
+        [
+          "core-messaging",
+          "4.0.0-SNAPSHOT"
+        ],
+        [
+          "core-idempotency",
+          "4.0.0-SNAPSHOT"
+        ],
+        [
+          "core-telemetry",
+          "4.0.0-SNAPSHOT"
+        ]
+      ]
+    },
+    {
+      "repository": "io.openleap.param.si",
+      "repositoryUrl": "https://github.com/openleap-io/io.openleap.param.si",
+      "implementationStatus": "active",
+      "hasSpecFolder": true,
+      "implSpecVersion": "2026-04-03",
+      "hasQaFolder": false,
+      "qaFolderNotes": "Checked 2026-04-29 via GitHub API - no /qa folder found.",
+      "notes": "",
+      "lastAnalysisCommitHash": "a706de9",
+      "lastAnalysisAt": "2026-04-29",
+      "adrComplianceScore": null,
+      "adrReviewGuidelinesVersion": null,
+      "adrReviewCommitHash": null,
+      "parentVersion": null,
+      "starterVersion": null,
       "coreDependencies": []
     },
     {
@@ -1295,14 +1643,90 @@
       "hasQaFolder": true,
       "qaFolderNotes": null,
       "notes": "",
-      "lastAnalysisCommitHash": "ebf3bf9",
-      "lastAnalysisAt": "2026-04-14",
+      "lastAnalysisCommitHash": "efcf4ad",
+      "lastAnalysisAt": "2026-04-29",
       "adrComplianceScore": null,
       "adrReviewGuidelinesVersion": null,
       "adrReviewCommitHash": null,
-      "parentVersion": "3.0.1",
-      "starterVersion": "3.0.1",
-      "coreDependencies": []
+      "parentVersion": "3.0.7",
+      "starterVersion": "4.0.0",
+      "coreDependencies": [
+        [
+          "core-common",
+          "4.0.0"
+        ],
+        [
+          "core-persistence",
+          "4.0.0"
+        ],
+        [
+          "core-messaging",
+          "4.0.0"
+        ],
+        [
+          "core-web",
+          "4.0.0"
+        ],
+        [
+          "core-security",
+          "4.0.0"
+        ],
+        [
+          "core-idempotency",
+          "4.0.0"
+        ],
+        [
+          "core-telemetry",
+          "4.0.0"
+        ]
+      ]
+    },
+    {
+      "repository": "io.openleap.shared.cap",
+      "repositoryUrl": "https://github.com/openleap-io/io.openleap.shared.cap",
+      "implementationStatus": "active",
+      "hasSpecFolder": true,
+      "implSpecVersion": "2026-04-01",
+      "hasQaFolder": true,
+      "qaFolderNotes": null,
+      "notes": "",
+      "lastAnalysisCommitHash": "29423a6",
+      "lastAnalysisAt": "2026-04-29",
+      "adrComplianceScore": null,
+      "adrReviewGuidelinesVersion": null,
+      "adrReviewCommitHash": null,
+      "parentVersion": "3.0.7",
+      "starterVersion": "4.0.0",
+      "coreDependencies": [
+        [
+          "core-common",
+          "4.0.0"
+        ],
+        [
+          "core-persistence",
+          "4.0.0"
+        ],
+        [
+          "core-web",
+          "4.0.0"
+        ],
+        [
+          "core-security",
+          "4.0.0"
+        ],
+        [
+          "core-messaging",
+          "4.0.0"
+        ],
+        [
+          "core-idempotency",
+          "4.0.0"
+        ],
+        [
+          "core-telemetry",
+          "4.0.0"
+        ]
+      ]
     },
     {
       "repository": "io.openleap.srv.apt",
@@ -1515,13 +1939,13 @@
       "hasQaFolder": true,
       "qaFolderNotes": null,
       "notes": "",
-      "lastAnalysisCommitHash": "5f4b90e",
-      "lastAnalysisAt": "2026-04-14",
+      "lastAnalysisCommitHash": "c6508b1",
+      "lastAnalysisAt": "2026-04-29",
       "adrComplianceScore": null,
       "adrReviewGuidelinesVersion": null,
       "adrReviewCommitHash": null,
       "parentVersion": null,
-      "starterVersion": "4.0.0-SNAPSHOT",
+      "starterVersion": "4.0.0",
       "coreDependencies": [
         [
           "core-common",
@@ -1570,12 +1994,12 @@
       "hasQaFolder": true,
       "qaFolderNotes": null,
       "notes": "",
-      "lastAnalysisCommitHash": "e9c602f",
-      "lastAnalysisAt": "2026-04-14",
+      "lastAnalysisCommitHash": "5d83313",
+      "lastAnalysisAt": "2026-04-29",
       "adrComplianceScore": null,
       "adrReviewGuidelinesVersion": null,
       "adrReviewCommitHash": null,
-      "parentVersion": "3.0.3-SNAPSHOT",
+      "parentVersion": "3.0.7",
       "starterVersion": "4.0.0-SNAPSHOT",
       "coreDependencies": [
         [
@@ -1621,12 +2045,12 @@
       "hasQaFolder": true,
       "qaFolderNotes": null,
       "notes": "",
-      "lastAnalysisCommitHash": "1f87ecc",
-      "lastAnalysisAt": "2026-04-14",
+      "lastAnalysisCommitHash": "645e284",
+      "lastAnalysisAt": "2026-04-29",
       "adrComplianceScore": null,
       "adrReviewGuidelinesVersion": null,
       "adrReviewCommitHash": null,
-      "parentVersion": "3.0.3-SNAPSHOT",
+      "parentVersion": "3.0.7",
       "starterVersion": "4.0.0-SNAPSHOT",
       "coreDependencies": [
         [
@@ -1678,6 +2102,24 @@
       "coreDependencies": []
     },
     {
+      "repository": "io.openleap.tech.ai",
+      "repositoryUrl": "https://github.com/openleap-io/io.openleap.tech.ai",
+      "implementationStatus": "active",
+      "hasSpecFolder": true,
+      "implSpecVersion": "2026-04-18",
+      "hasQaFolder": false,
+      "qaFolderNotes": "Checked 2026-04-29 via GitHub API - no /qa folder found.",
+      "notes": "",
+      "lastAnalysisCommitHash": "7b19568",
+      "lastAnalysisAt": "2026-04-29",
+      "adrComplianceScore": null,
+      "adrReviewGuidelinesVersion": null,
+      "adrReviewCommitHash": null,
+      "parentVersion": null,
+      "starterVersion": null,
+      "coreDependencies": []
+    },
+    {
       "repository": "io.openleap.tech.dms",
       "repositoryUrl": "https://github.com/openleap-io/io.openleap.tech.dms",
       "implementationStatus": "active",
@@ -1686,13 +2128,313 @@
       "hasQaFolder": true,
       "qaFolderNotes": null,
       "notes": "",
-      "lastAnalysisCommitHash": "cb701e2",
-      "lastAnalysisAt": "2026-04-14",
+      "lastAnalysisCommitHash": "23781c5",
+      "lastAnalysisAt": "2026-04-29",
       "adrComplianceScore": null,
       "adrReviewGuidelinesVersion": null,
       "adrReviewCommitHash": null,
       "parentVersion": null,
-      "starterVersion": "3.0.0-SNAPSHOT",
+      "starterVersion": "4.1.0-SNAPSHOT",
+      "coreDependencies": [
+        [
+          "core-common",
+          "4.1.0-SNAPSHOT"
+        ],
+        [
+          "core-persistence",
+          "4.1.0-SNAPSHOT"
+        ],
+        [
+          "core-messaging",
+          "4.1.0-SNAPSHOT"
+        ],
+        [
+          "core-web",
+          "4.1.0-SNAPSHOT"
+        ],
+        [
+          "core-security",
+          "4.1.0-SNAPSHOT"
+        ],
+        [
+          "core-idempotency",
+          "4.1.0-SNAPSHOT"
+        ],
+        [
+          "core-telemetry",
+          "4.1.0-SNAPSHOT"
+        ]
+      ]
+    },
+    {
+      "repository": "io.openleap.tech.email",
+      "repositoryUrl": "https://github.com/openleap-io/io.openleap.tech.email",
+      "implementationStatus": "active",
+      "hasSpecFolder": true,
+      "implSpecVersion": "2026-04-18",
+      "hasQaFolder": false,
+      "qaFolderNotes": "Checked 2026-04-29 via GitHub API - no /qa folder found.",
+      "notes": "",
+      "lastAnalysisCommitHash": "51cd4f3",
+      "lastAnalysisAt": "2026-04-29",
+      "adrComplianceScore": null,
+      "adrReviewGuidelinesVersion": null,
+      "adrReviewCommitHash": null,
+      "parentVersion": null,
+      "starterVersion": null,
+      "coreDependencies": []
+    },
+    {
+      "repository": "io.openleap.tech.jc",
+      "repositoryUrl": "https://github.com/openleap-io/io.openleap.tech.jc",
+      "implementationStatus": "active",
+      "hasSpecFolder": true,
+      "implSpecVersion": "2026-04-01",
+      "hasQaFolder": true,
+      "qaFolderNotes": null,
+      "notes": "",
+      "lastAnalysisCommitHash": "e9171cc",
+      "lastAnalysisAt": "2026-04-29",
+      "adrComplianceScore": null,
+      "adrReviewGuidelinesVersion": null,
+      "adrReviewCommitHash": null,
+      "parentVersion": "3.0.7",
+      "starterVersion": "4.0.0-SNAPSHOT",
+      "coreDependencies": [
+        [
+          "core-common",
+          "4.0.0-SNAPSHOT"
+        ],
+        [
+          "core-web",
+          "4.0.0-SNAPSHOT"
+        ],
+        [
+          "core-persistence",
+          "4.0.0-SNAPSHOT"
+        ],
+        [
+          "core-security",
+          "4.0.0-SNAPSHOT"
+        ],
+        [
+          "core-telemetry",
+          "4.0.0-SNAPSHOT"
+        ],
+        [
+          "core-lock",
+          "4.0.0-SNAPSHOT"
+        ],
+        [
+          "core-idempotency",
+          "4.0.0-SNAPSHOT"
+        ],
+        [
+          "core-messaging",
+          "4.0.0-SNAPSHOT"
+        ]
+      ]
+    },
+    {
+      "repository": "io.openleap.tech.nfs",
+      "repositoryUrl": "https://github.com/openleap-io/io.openleap.tech.nfs",
+      "implementationStatus": "active",
+      "hasSpecFolder": true,
+      "implSpecVersion": "2026-03-10",
+      "hasQaFolder": false,
+      "qaFolderNotes": "Checked 2026-04-29 via GitHub API - no /qa folder found.",
+      "notes": "",
+      "lastAnalysisCommitHash": "0d2c346",
+      "lastAnalysisAt": "2026-04-29",
+      "adrComplianceScore": null,
+      "adrReviewGuidelinesVersion": null,
+      "adrReviewCommitHash": null,
+      "parentVersion": "3.0.7",
+      "starterVersion": "4.0.0",
+      "coreDependencies": [
+        [
+          "core-common",
+          "4.0.0"
+        ],
+        [
+          "core-persistence",
+          "4.0.0"
+        ],
+        [
+          "core-messaging",
+          "4.0.0"
+        ],
+        [
+          "core-web",
+          "4.0.0"
+        ],
+        [
+          "core-security",
+          "4.0.0"
+        ],
+        [
+          "core-idempotency",
+          "4.0.0"
+        ],
+        [
+          "core-telemetry",
+          "4.0.0"
+        ]
+      ]
+    },
+    {
+      "repository": "io.openleap.tech.rpt",
+      "repositoryUrl": "https://github.com/openleap-io/io.openleap.tech.rpt",
+      "implementationStatus": "active",
+      "hasSpecFolder": true,
+      "implSpecVersion": "2026-04-03",
+      "hasQaFolder": false,
+      "qaFolderNotes": "Checked 2026-04-29 via GitHub API - no /qa folder found.",
+      "notes": "",
+      "lastAnalysisCommitHash": "a9d3833",
+      "lastAnalysisAt": "2026-04-29",
+      "adrComplianceScore": null,
+      "adrReviewGuidelinesVersion": null,
+      "adrReviewCommitHash": null,
+      "parentVersion": null,
+      "starterVersion": null,
+      "coreDependencies": []
+    },
+    {
+      "repository": "io.openleap.tech.search",
+      "repositoryUrl": "https://github.com/openleap-io/io.openleap.tech.search",
+      "implementationStatus": "active",
+      "hasSpecFolder": true,
+      "implSpecVersion": "2026-04-18",
+      "hasQaFolder": false,
+      "qaFolderNotes": "Checked 2026-04-29 via GitHub API - no /qa folder found.",
+      "notes": "",
+      "lastAnalysisCommitHash": "d4e3404",
+      "lastAnalysisAt": "2026-04-29",
+      "adrComplianceScore": null,
+      "adrReviewGuidelinesVersion": null,
+      "adrReviewCommitHash": null,
+      "parentVersion": null,
+      "starterVersion": null,
+      "coreDependencies": []
+    },
+    {
+      "repository": "io.openleap.tech.zugferd",
+      "repositoryUrl": "https://github.com/openleap-io/io.openleap.tech.zugferd",
+      "implementationStatus": "active",
+      "hasSpecFolder": false,
+      "implSpecVersion": null,
+      "hasQaFolder": false,
+      "qaFolderNotes": "Checked 2026-04-29 via GitHub API - no /qa folder found.",
+      "notes": "",
+      "lastAnalysisCommitHash": "2b4ba09",
+      "lastAnalysisAt": "2026-04-29",
+      "adrComplianceScore": null,
+      "adrReviewGuidelinesVersion": null,
+      "adrReviewCommitHash": null,
+      "parentVersion": "3.0.7",
+      "starterVersion": "4.0.0",
+      "coreDependencies": [
+        [
+          "core-common",
+          "4.0.0"
+        ],
+        [
+          "core-persistence",
+          "4.0.0"
+        ],
+        [
+          "core-messaging",
+          "4.0.0"
+        ],
+        [
+          "core-web",
+          "4.0.0"
+        ],
+        [
+          "core-security",
+          "4.0.0"
+        ],
+        [
+          "core-idempotency",
+          "4.0.0"
+        ],
+        [
+          "core-telemetry",
+          "4.0.0"
+        ]
+      ]
+    },
+    {
+      "repository": "io.openleap.tks.ch",
+      "repositoryUrl": "https://github.com/openleap-io/io.openleap.tks.ch",
+      "implementationStatus": "active",
+      "hasSpecFolder": true,
+      "implSpecVersion": "2026-04-18",
+      "hasQaFolder": false,
+      "qaFolderNotes": "Checked 2026-04-29 via GitHub API - no /qa folder found.",
+      "notes": "",
+      "lastAnalysisCommitHash": "79a7c3f",
+      "lastAnalysisAt": "2026-04-29",
+      "adrComplianceScore": null,
+      "adrReviewGuidelinesVersion": null,
+      "adrReviewCommitHash": null,
+      "parentVersion": null,
+      "starterVersion": null,
+      "coreDependencies": []
+    },
+    {
+      "repository": "io.openleap.tks.cmdb",
+      "repositoryUrl": "https://github.com/openleap-io/io.openleap.tks.cmdb",
+      "implementationStatus": "active",
+      "hasSpecFolder": true,
+      "implSpecVersion": "2026-04-18",
+      "hasQaFolder": false,
+      "qaFolderNotes": "Checked 2026-04-29 via GitHub API - no /qa folder found.",
+      "notes": "",
+      "lastAnalysisCommitHash": "d798286",
+      "lastAnalysisAt": "2026-04-29",
+      "adrComplianceScore": null,
+      "adrReviewGuidelinesVersion": null,
+      "adrReviewCommitHash": null,
+      "parentVersion": null,
+      "starterVersion": null,
+      "coreDependencies": []
+    },
+    {
+      "repository": "io.openleap.tks.kb",
+      "repositoryUrl": "https://github.com/openleap-io/io.openleap.tks.kb",
+      "implementationStatus": "active",
+      "hasSpecFolder": true,
+      "implSpecVersion": "2026-04-18",
+      "hasQaFolder": false,
+      "qaFolderNotes": "Checked 2026-04-29 via GitHub API - no /qa folder found.",
+      "notes": "",
+      "lastAnalysisCommitHash": "51f0ab4",
+      "lastAnalysisAt": "2026-04-29",
+      "adrComplianceScore": null,
+      "adrReviewGuidelinesVersion": null,
+      "adrReviewCommitHash": null,
+      "parentVersion": null,
+      "starterVersion": null,
+      "coreDependencies": []
+    },
+    {
+      "repository": "io.openleap.tks.tkt",
+      "repositoryUrl": "https://github.com/openleap-io/io.openleap.tks.tkt",
+      "implementationStatus": "active",
+      "hasSpecFolder": true,
+      "implSpecVersion": "2026-04-18",
+      "hasQaFolder": false,
+      "qaFolderNotes": "Checked 2026-04-29 via GitHub API - no /qa folder found.",
+      "notes": "",
+      "lastAnalysisCommitHash": "8f1224d",
+      "lastAnalysisAt": "2026-04-29",
+      "adrComplianceScore": null,
+      "adrReviewGuidelinesVersion": null,
+      "adrReviewCommitHash": null,
+      "parentVersion": null,
+      "starterVersion": null,
       "coreDependencies": []
     }
   ]

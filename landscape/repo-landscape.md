@@ -177,8 +177,8 @@ Which specs live where and what is canonical.
 | iam/* (T1) | `T1_Platform/iam/domain-specs/` | `io.openleap.iam.*/` (per service) |
 | shared/bp (T2) | `T2_Common/domain-specs/shared_bp-spec.md` | `io.openleap.shared.bp/` |
 | shared/cap (T2) | `T2_Common/domain-specs/shared_cap-spec.md` | `io.openleap.shared.cap/` (planned) |
-| auto/ntf (T2) | `T2_Common/domain-specs/auto_ntf-spec.md` | `io.openleap.auto.ntf/` (planned) — supersedes `crm.ntf` |
-| auto/wf (T2) | `T2_Common/domain-specs/auto_wf-spec.md` | `io.openleap.auto.wf/` (planned) — supersedes `crm.wf` |
+| auto/ntf (T2) | `T2_Common/domain-specs/auto_ntf-spec.md` | `io.openleap.auto.ntf/` (active, renamed 2026-04-29 from `io.openleap.shared.ntf`) — supersedes `crm.ntf` |
+| auto/wf (T2) | `T2_Common/domain-specs/auto_wf-spec.md` | `io.openleap.auto.wf/` (active, renamed 2026-04-29 from `io.openleap.shared.wf`) — supersedes `crm.wf` |
 | fi/* (T3) | `T3_Domains/FI/` | per service |
 | crm/* (T3) | `T3_Domains/CRM/` | `io.openleap.crm.*/` (see CRM suite header for DEPRECATED entries) |
 | tks/tkt (T3) | `T3_Domains/TKS/domain-specs/tks_tkt-spec.md` | `io.openleap.tks.tkt/` (planned) |

@@ -225,7 +225,7 @@
       "suite": "auto",
       "tier": "T2",
       "path": "T2_Common",
-      "_regenNote": "T2 split 2026-04-21: new suite 'auto' promoted from crm.ntf + crm.wf. 60-day routing-key bridge active.",
+      "_regenNote": "T2 split 2026-04-21: new suite 'auto' promoted from crm.ntf + crm.wf via intermediate shared.ntf/wf naming, then suite-renamed to auto.ntf/wf on 2026-04-29 (hard cutover, no bridge).",
       "suiteSpec": {
         "file": "T2_Common/_auto_suite.md",
         "templateCompliance": null
